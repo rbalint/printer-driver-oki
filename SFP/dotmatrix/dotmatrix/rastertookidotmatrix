@@ -1,0 +1,130 @@
+#!/bin/sh
+
+######################################################################
+#
+# Copyright 2008, 2009, 2010  Oki Data Corporation
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+######################################################################
+# version: 2.0
+######################################################################
+
+LOG="/dev/null"
+
+exec 2>${LOG}
+
+PATH=/bin:/usr/sbin:/usr/bin
+export PATH
+
+CAT="/bin/cat"
+CUT="/usr/bin/cut"
+ECHO="/bin/echo"
+GREP="/bin/grep"
+SED="/bin/sed"
+TR="/usr/bin/tr"
+
+GSCRIPT="/usr/bin/gs"
+
+GSCRIPT_LIB="${CUPS_FONTPATH:-/usr/share/cups/fonts}"
+export GSCRIPT_LIB
+
+get_values()
+{
+
+_default=""
+
+if [ -f "${PPD}" ] ; then
+	_default=$(${GREP} "^*Default${1}" ${PPD} | ${CUT} -d" " -f2 2> /dev/null)
+
+fi
+
+${ECHO} "${_default}"
+
+}
+
+default_pagesize="letter"
+
+_jobid="${1}"
+_user="${2}"
+_title="${3}"
+_options="${5}"
+_inFile="${6}"
+MNAME="ModelName:"
+
+resolution=`get_values Resolution | ${SED} 's/dpi//' | ${TR} '[:upper:]' '[:lower:]'`
+
+pagesize=`get_values PageSize | ${TR} '[:upper:]' '[:lower:]'`
+
+for i in `${GREP} "${MNAME}" ${PPD} | ${CUT} -d\" -f2 | ${TR} -d '[:alpha:]' 2> /dev/null`
+do
+	case "${i}" in
+		*9*) pin="9" 
+			default_resolution="120x72";;
+		*24*) pin="24"
+			default_resolution="180x180";;
+		*)pin="9" 
+			default_resolution="120x72";;
+	esac
+done
+
+for i in `${ECHO} ${_options} | ${TR} '[:upper:]' '[:lower:]'`
+do
+	case ${i} in
+	 pagesize=*) 
+		pagesize=`${ECHO} ${i} | ${CUT} -d'=' -f2`
+		case ${pagesize} in
+		 a4|letter|legal|fanfold);;
+		 *) pagesize="${default_pagesize}" ;;
+		esac
+		;;
+	 resolution=*) 
+		resolution=`${ECHO} ${i} | ${CUT} -d'=' -f2 | ${SED} 's/dpi//'`
+		case ${resolution} in
+		 60x72|72x72|120x72|240x72|120x180|180x180|180x216|360x180|360x216|360x360 );;
+		 *) resolution="${default_resolution}" ;;
+		esac
+
+		;;
+	esac
+done
+
+_resolution="${resolution:-$default_resolution}"
+_pagesize="${pagesize:-$default_pagesize}"
+
+ESC="\033"
+EPSONMODE="${ESC}{A"
+INITIALIZE="${ESC}@"
+
+inFile="${_inFile:--}"
+
+GS_OPTIONS="-dQUIET -dPARANOIDSAFER -dNOPAUSE -dBATCH -sDEVICE=epson"
+
+GS_OPTIONS="${GS_OPTIONS} -r${_resolution} -sPAPERSIZE=${_pagesize} -sstdout=%stderr -sOUTPUTFILE=-"
+
+${ECHO} INFO: Starting Ghostscript `${GSCRIPT} --version`... 1>&2
+${ECHO} "DEBUG: Running ${GSCRIPT} $GS_OPTIONS -sOUTPUTFILE=%stdout ${inFile}" 1>&2
+
+${ECHO} "INFO: options = [${_options}]" 1>&2
+
+${ECHO} -n -e ${EPSONMODE}
+${ECHO} -n -e ${INITIALIZE}
+${ECHO} -n -e "\033P\022"
+
+exec ${GSCRIPT} ${GS_OPTIONS} "${inFile}"  | ${SED} "s/@P//" 
+
+${ECHO} -n -e ${INITIALIZE}
+
+exit 0
