@@ -1,8 +1,11 @@
-DESTDIR ?= /usr
-FILTER_PATH ?= $(DESTDIR)/lib/cups/filter
-PPD_PATH ?= $(DESTDIR)/share/ppd/okidata
+PREFIX ?= /usr/local
+
+FILTER_PATH ?= $(DESTDIR)$(PREFIX)/lib/cups/filter
+PPD_PATH ?= $(DESTDIR)$(PREFIX)/share/ppd/okidata
 
 PPDS = $(wildcard */*.ppd */*/*/*.ppd */*/*/*/*.ppd)
+
+all:
 
 install:
 	install -m 755 filters/* $(FILTER_PATH)
