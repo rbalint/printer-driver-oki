@@ -1,0 +1,910 @@
+*PPD-Adobe: "4.3"
+*% ==================================================
+*% Printer Description File for OKI B710, B720, B730
+*% Copyright 2006-2007 Oki Data Corporation
+*% ==================================================
+*% Note)
+*% This PostScript Printer Description(PPD) file is free software; you
+*% can redistribute it and/or modify it under the terms of the GNU
+*% General Public License version 2 or later as published by the Free
+*% Software Foundation.
+*%
+*% In addition to the permissions in the GNU General Public License,
+*% Oki Data Corporation gives you unlimited permission to link the
+*% PostScript code fragments herein into your PostScript documents to
+*% form an excutable for enabling printer-specific features, and
+*% distribute those combinations without any restrictions from the use
+*% of this PPD file. (The General Public License restrictions do apply
+*% in other respects; for example, they cover modification of the
+*% file, and distribution when not merged into a PostScript document.)
+*%
+*% This PPD is distributed in the hope that it will be useful, but
+*% WITHOUT ANY WARRANTY; without even the implied warranty of
+*% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*% General Public License for more details.
+*%
+*% You should have received a copy of the GNU General Public License
+*% along with this PPD; see the file COPYING.
+*%
+*%
+*% ==========================================================
+*FormatVersion: "4.3"
+*FileVersion: "2.0"
+*LanguageEncoding: ISOLatin1
+*LanguageVersion: English
+*Manufacturer: "OKI"
+*PCFileName: "B700PS.PPD"
+*Product: "(B710 / B720 / B730)"
+*PSVersion: "(3016.103) 1.063"
+*ModelName: "OKI B710 / B720 / B730"
+*ShortNickName: "OKI B710 / B720 / B730"
+*NickName: "OKI B710 / B720 / B730"
+*CenterRegistered: True
+*HWMargins: 0 0 0 0
+*LeadingEdge Short: ""
+*DefaultLeadingEdge: Short
+*cupsVersion: 1.1
+*cupsManualCopies: False
+*cupsFilter:	"application/vnd.cups-postscript 0 okijobaccounting"
+
+*Throughput: "45"
+*LanguageLevel: "3"
+*Protocols: TBCP PJL 
+*1284Modes Parallel: Compat Nibble ECP
+
+*% FreeVM 
+*FreeVM: "72161536" 
+*VMOption 128MB/128 MB RAM: "72161536" 
+*VMOption 384MB/384 MB RAM: "340596992" 
+*VMOption 640MB/640 MB RAM: "609032448"
+*VMOption 1024MB/1024 MB RAM: "1011685632"
+
+*% ==================================================
+*%
+*OKJobAccount: False
+*OKJobType: False
+*OKJobInfo: False
+*InstalledMemory: 128MB
+
+*OpenGroup: InstallableOptions/OKI Options Installed
+
+*OpenUI *OKOptionTray/Available Tray: PickOne
+*DefaultOKOptionTray: 2
+*OKOptionTray 2/2: ""
+*OKOptionTray 3/3: ""
+*OKOptionTray 4/4: ""
+*CloseUI: *OKOptionTray
+
+*OpenUI *OffsetCatchTray/Catch Tray: Boolean
+*DefaultOffsetCatchTray: False
+*OffsetCatchTray True/Installed: ""
+*OffsetCatchTray False/Not Installed: ""
+*CloseUI: *OffsetCatchTray
+
+*OpenUI *Option1/Duplex: Boolean
+*DefaultOption1: False 
+*Option1 True/Installed: ""
+*Option1 False/Not Installed: ""
+*CloseUI: *Option1
+
+*CloseGroup: InstallableOptions
+
+*%=== JCL Features ==========================
+*JCLBegin: "<1B>%-12345X@PJL COMMENT OKI B710 / B720 / B730 PostScript v2.0<0A>"
+*JCLToPSInterpreter: "@PJL RDYMSG DISPLAY = <22><22><0A>@PJL ENTER LANGUAGE = POSTSCRIPT <0A>"
+*JCLEnd: "<1B>%-12345X<1B>%-12345X@PJL EOJ <0A>"
+*%===========================================
+
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*TTRasterizer: Type42		
+
+*Password: "()"
+*ExitServer: "
+  count 0 eq
+  {false}
+  {true exch startjob}
+  ifelse
+  not 
+  {
+    (WARNING: Cannot modify initial VM.) =
+    (Missing or invalid password.) =
+    (Please contact the author of this software.) = flush quit
+  } if"
+*End
+*Reset: "
+  count 0 eq
+  {false}
+  {true exch startjob}
+  ifelse
+  not
+  {
+    (WARNING: Cannot reset printer.) =
+    (Missing or invalid password.) =
+    (Please contact the author of this software.) = flush quit
+  } if
+  systemdict /quit get exec
+  (WARNING : Printer Reset Failed.) = flush"
+*End
+
+
+*% ==================================================
+*%
+*% ==== Duplex options ====
+*%
+
+*OpenUI *Duplex/Duplex: PickOne
+*OrderDependency: 55.2 AnySetup *Duplex
+*DefaultDuplex: None
+*Duplex None/None: "(<<) cvx exec /Duplex false /Tumble false (>>) cvx exec setpagedevice"
+*Duplex DuplexNoTumble/Long Edge Binding: "(<<) cvx exec /Duplex true /Tumble false (>>) cvx exec setpagedevice"
+*Duplex DuplexTumble/Short Edge Binding: "(<<) cvx exec /Duplex true /Tumble true (>>) cvx exec setpagedevice"
+*CloseUI: *Duplex
+
+*OpenUI *InputSlot/Paper Source: PickOne
+*OrderDependency: 50.1 AnySetup *InputSlot
+*DefaultInputSlot: Tray1
+*InputSlot Tray1/Tray 1: "<<currentpagedevice /InputAttributes get 1 get {}forall /InputAttributes << /Priority [1 2 3 4] >> >> setpagedevice"
+*End
+*InputSlot Tray2/Tray 2: "<<currentpagedevice /InputAttributes get 2 get {}forall /InputAttributes << /Priority [2 3 4 1] >> >> setpagedevice"
+*End  
+*InputSlot Optional_Tray3/Tray 3: "<<currentpagedevice /InputAttributes get 3 get {}forall /InputAttributes << /Priority [3 4 1 2] >> >> setpagedevice"
+*End
+*InputSlot Optional_Tray4/Tray 4: "<<currentpagedevice /InputAttributes get 4 get {}forall /InputAttributes << /Priority [4 1 2 3] >> >> setpagedevice"
+*End  
+
+*CloseUI: *InputSlot
+
+*DefaultTransfer: Null
+*Transfer Null: "{ }"
+*Transfer Null.Inverse: "{1 exch sub}"
+
+*% ==================================================
+*%
+*% Paper Handling ===================
+*%
+*% ========================================================
+*% Custom Page Size
+*NonUIOrderDependency: 50.2 AnySetup *CustomPageSize
+*MaxMediaWidth: "612"
+*MaxMediaHeight: "1008"
+*CenterRegistered: True
+*HWMargins: 0 0 0 0
+*LeadingEdge Short: ""
+*DefaultLeadingEdge: Short
+*VariablePaperSize: True
+*ParamCustomPageSize Width: 1 points 216 612
+*ParamCustomPageSize Height: 2 points 360 1008
+*ParamCustomPageSize WidthOffset: 3 points 0 0
+*ParamCustomPageSize HeightOffset: 4 points 0 0
+*ParamCustomPageSize Orientation: 5 int 0 3
+
+*CustomPageSize True: "pop pop pop
+	<<
+	  /PageSize [5 -2 roll]
+	  /ImagingBBox null
+	  /InputAttributes <</Priority [0 1 2 3]>>
+	>> setpagedevice"
+*End
+
+*% end Custom Page Size
+
+*LandscapeOrientation:  Plus90
+
+*%
+*% ===== PageSize options =====
+*%
+
+*OpenUI *PageSize: PickOne
+*OrderDependency: 50.2 AnySetup *PageSize
+*DefaultPageSize: Letter
+*% 
+*PageSize A4/A4: "
+(<<) cvx exec
+  /PageSize [595 842]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize A5/A5: "
+(<<) cvx exec
+  /PageSize [420 595]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize A6/A6: "
+(<<) cvx exec
+  /PageSize [297 420]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize B5/B5: "
+(<<) cvx exec
+  /PageSize [516 729]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize EnvC5/C5: "
+(<<) cvx exec
+  /PageSize [459 649]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Env9/COM-9: "
+(<<) cvx exec
+  /PageSize [279 639]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Env10/COM-10: "
+(<<) cvx exec
+  /PageSize [297 684]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize EnvDL/DL: "
+(<<) cvx exec
+  /PageSize [312 624]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Executive/Executive: "
+(<<) cvx exec
+  /PageSize [522 756]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Legal/Legal: "
+(<<) cvx exec
+  /PageSize [612 1008]
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Legal13/Legal 13: "
+(<<) cvx exec
+  /PageSize [612 936]
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Letter/Letter: "
+(<<) cvx exec
+  /PageSize [612 792]
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize EnvMonarch/Monarch: "
+(<<) cvx exec
+  /PageSize [279 540]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageSize Statement/Statement: "
+(<<) cvx exec
+  /PageSize [396 612]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+
+*CloseUI: *PageSize
+
+*% ==================================================
+*%
+*RequiresPageRegion All: True
+
+*% ==================================================
+*%
+*% ===== PageRegion options =====
+*%
+*OpenUI *PageRegion:  PickOne
+*OrderDependency: 50.3 AnySetup *PageRegion
+*DefaultPageRegion: Letter
+*PageRegion Letter/Letter (8.5 x 11 in): "
+(<<) cvx exec
+  /PageSize [612 792]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Legal/Legal (8.5 x 14 in): "
+(<<) cvx exec
+  /PageSize [612 1008]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Legal13/Legal13 (8.5 x 13 in): "
+(<<) cvx exec
+  /PageSize [612 936]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Executive/Executive (7.25 x 10.5 in): "
+(<<) cvx exec
+  /PageSize [522 756]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Statement/Statement (5.5 x 8.5 in): "
+(<<) cvx exec
+  /PageSize [396 612]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion A4/A4 (210 x 297 mm): "
+(<<) cvx exec
+  /PageSize [595 842]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion A5/A5 (148 x 210 mm): "
+(<<) cvx exec
+  /PageSize [420 595]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion A6/A6 (105 x 148 mm): "
+(<<) cvx exec
+  /PageSize [297 420]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion B5/B5 (182 x 257 mm): "
+(<<) cvx exec
+  /PageSize [516 729]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Env9/COM-9 (3.5 x 8.9 in): "
+(<<) cvx exec
+  /PageSize [279 639]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion Env10/COM-10 (4.125 x 9.5 in): "
+(<<) cvx exec
+  /PageSize [297 684]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion EnvMonarch/Monarch (3.875 x 7.5 in): "
+(<<) cvx exec
+  /PageSize [279 540]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion EnvC5/C5 (162 x 229 mm): "
+(<<) cvx exec
+  /PageSize [459 649]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*PageRegion EnvDL/DL (110 x 220 mm): "
+(<<) cvx exec
+  /PageSize [312 624]
+
+  /ImagingBBox null
+(>>) cvx exec setpagedevice"
+*End
+*CloseUI: *PageRegion
+
+
+*% =======================================================================
+*%
+*% The following entries provide the imageable area of each paper keyword.
+*%
+
+*DefaultImageableArea: Letter
+*ImageableArea Letter/Letter (8.5 x 11 in): "12.000 12.000 598.661 778.661"
+*ImageableArea Legal/Legal (8.5 x 14 in): "12.000 12.000 598.661 994.661"
+*ImageableArea Legal13/Legal13 (8.5 x 13 in): "12.000 12.000 598.661 922.661"
+*ImageableArea Executive/Executive (7.25 x 10.5 in): "12.000 12.000 508.661 742.661"
+*ImageableArea Statement/Statement (5.5 x 8.5 in): "12.000 12.000 382.661 598.661"
+*ImageableArea A4/A4 (210 x 297 mm): "12.000 12.000 581.937 828.551"
+*ImageableArea A5/A5 (148 x 210 mm): "12.000 12.000 406.189 581.937"
+*ImageableArea A6/A6 (105 x 148 mm): "12.000 12.000 284.299 406.189"
+*ImageableArea B5/B5 (182 x 257 mm): "12.000 12.000 502.567 715.165"
+*ImageableArea Env9/COM-9 (3.5 x 8.9 in): "12.000 12.000 265.661 625.661"
+*ImageableArea Env10/COM-10 (4.125 x 9.5 in): "12.000 12.000 283.661 670.661"
+*ImageableArea EnvMonarch/Monarch (3.875 x 7.5 in): "12.000 12.000 265.661 526.661"
+*ImageableArea EnvC5/C5 (162 x 229 mm): "12.000 12.000 445.874 635.795"
+*ImageableArea EnvDL/DL (110 x 220 mm): "12.000 12.000 298.472 610.283"
+
+
+*% ==================================================
+*%
+*% These provide the physical dimensions of the paper by keyword
+*%
+
+*DefaultPaperDimension: Letter
+*PaperDimension Letter/Letter (8.5 x 11 in): "612 792"
+*PaperDimension Legal/Legal (8.5 x 14 in): "612 1008"
+*PaperDimension Legal13/Legal13 (8.5 x 13 in): "612 936"
+*PaperDimension Executive/Executive (7.25 x 10.5 in): "522 756"
+*PaperDimension Statement/Statement (5.5 x 8.5 in): "396 612"
+*PaperDimension A4/A4 (210 x 297 mm): "595 842"
+*PaperDimension A5/A5 (148 x 210 mm): "420 595"
+*PaperDimension A6/A6 (105 x 148 mm): "297 420"
+*PaperDimension B5/B5 (182 x 257 mm): "516 729"
+*PaperDimension Env9/COM-9 (3.5 x 8.9 in): "279 639"
+*PaperDimension Env10/COM-10 (4.125 x 9.5 in): "297 684"
+*PaperDimension EnvMonarch/Monarch (3.875 x 7.5 in): "279 540"
+*PaperDimension EnvC5/C5 (162 x 229 mm): "459 649"
+*PaperDimension EnvDL/DL (110 x 220 mm): "312 624"
+
+
+*OpenGroup: Printing_Option/OKI Job Option
+
+*% ==================================================
+*%
+*% ===== Resolution ===================
+*%
+*OpenUI *Resolution/Resolution: PickOne
+*OrderDependency: 40.1 AnySetup *Resolution
+*DefaultResolution: 600dpi
+*Resolution 1200dpi/Fine: "
+  2 dict
+    dup /HWResolution [1200 1200] put 
+    dup /Policies
+      1 dict dup /HWResolution 2 put 
+  put setpagedevice
+"
+*End
+*Resolution 600dpi/Normal: "
+  2 dict
+    dup /HWResolution [600 600] put 
+    dup /Policies
+      1 dict dup /HWResolution 2 put 
+  put setpagedevice
+"
+*End
+*CloseUI: *Resolution
+
+*OpenUI *MediaType/Media Type:  PickOne
+*OrderDependency: 19.0 AnySetup *MediaType
+*DefaultMediaType: AutoSelect
+*MediaType Bond/Bond: "<< /MediaType (Bond) >> setpagedevice"
+*MediaType CardStock/Cardstock: "<< /MediaType (CardStock) >> setpagedevice"
+*MediaType Colored/Colored: "<< /MediaType (Colored) >> setpagedevice"
+*MediaType Envelope/Envelope: "<< /MediaType (Envelope) >> setpagedevice"
+*MediaType Label/Label: "<< /MediaType (Label) >> setpagedevice"
+*MediaType Letterhead/Letterhead: "<< /MediaType (Letterhead) >> setpagedevice"
+*MediaType Plain/Plain: "<< /MediaType (Plain) >> setpagedevice"
+*MediaType Postcard/Postcard: "<< /MediaType (Postcard) >> setpagedevice"
+*MediaType Preprinted/Preprinted: "<< /MediaType (Preprinted) >> setpagedevice"
+*MediaType Prepunch/Prepunched: "<< /MediaType (Prepunch) >> setpagedevice"
+*MediaType AutoSelect/Printer Setting: "<< /MediaType null >> setpagedevice"
+*MediaType Thick1/Thick 1: "<< /MediaType (Thick1) >> setpagedevice"
+*MediaType Thick2/Thick 2: "<< /MediaType (Thick2) >> setpagedevice"
+*MediaType Thick3/Thick 3: "<< /MediaType (Thick3) >> setpagedevice"
+*MediaType Thin/Thin: "<< /MediaType (Thin) >> setpagedevice"
+*MediaType Transparency/Transparency: "<< /MediaType (Transparency) >> setpagedevice"
+*CloseUI: *MediaType
+
+*OpenUI *MediaCheck/Media Check: Boolean
+*OrderDependency: 15.0 AnySetup *MediaCheck
+*DefaultMediaCheck: Enable
+*MediaCheck Enable/Yes: "<</Policies <</PageSize 2>> >> setpagedevice"
+*MediaCheck Disable/No: "<</Policies <</PageSize 7>> >> setpagedevice"
+*CloseUI: *MediaCheck
+
+*OpenUI *Autoresize/Auto Resize: Boolean
+*OrderDependency: 15.0 AnySetup *Autoresize
+*DefaultAutoresize: Off
+*Autoresize On/Yes: "<</Policies <</PageSize 3>>>> setpagedevice"
+*Autoresize Off/No: "<</Policies <</PageSize 2>>>> setpagedevice"
+*CloseUI: *Autoresize
+
+*OpenUI *OutputBin/Output Tray: PickOne
+*OrderDependency: 29.0 AnySetup *OutputBin
+*DefaultOutputBin: FaceDown
+*OutputBin FaceDown/Default: "<</OutputType (FaceDown)>> setpagedevice"
+*OutputBin OffsetTray/Catch: "<</OutputType (OffsetTray)>> setpagedevice"
+*CloseUI: *OutputBin
+
+*OpenUI *Jog/Jog: Boolean
+*OrderDependency: 30.0 AnySetup *Jog
+*DefaultJog: None
+*Jog EndOfJob/Yes: "<</Jog 2>> setpagedevice"
+*Jog None/No: "<</Jog 0>> setpagedevice"
+*CloseUI: *Jog
+
+*OpenUI *TonerSaver/Toner Saving: Boolean
+*OrderDependency: 15.0 AnySetup *TonerSaver
+*DefaultTonerSaver: Off
+*TonerSaver On/Yes: "<</PostRenderingEnhanceDetails <</Type 29 /TonerSaver 1 /REValue 0>> /PostRenderingEnhance false>> setpagedevice"
+*TonerSaver Off/No: "<</PostRenderingEnhanceDetails <</Type 29 /TonerSaver 0 /REValue 0>> /PostRenderingEnhance true>> setpagedevice"
+*CloseUI: *TonerSaver
+
+*OpenUI *TraySwitch/Tray Switch: Boolean
+*OrderDependency: 30.0 AnySetup *TraySwitch
+*DefaultTraySwitch: True
+*TraySwitch True/Yes: "<</TraySwitch true>> setpagedevice"
+*TraySwitch False/No: "<</TraySwitch false>> setpagedevice"
+*CloseUI: *TraySwitch
+
+*OpenUI *ExitJamRecovery/Jam Recovery: Boolean
+*OrderDependency: 40.0 AnySetup *ExitJamRecovery
+*DefaultExitJamRecovery: True
+*ExitJamRecovery True/Yes: "<</ExitJamRecovery  true>> setpagedevice"
+*ExitJamRecovery False/No: "<</ExitJamRecovery false>> setpagedevice"
+*CloseUI: *ExitJamRecovery
+
+
+*CloseGroup: Printing_Option
+
+*OpenGroup: Water/OKI Watermark
+
+*%+++ WaterMark Text +++++++++++++++++++++++++++++++++++++
+*OpenUI *OKwmText/Watermark: PickOne
+*OrderDependency: 300 AnySetup *OKwmText
+*DefaultOKwmText: None
+*OKwmText None/None: "userdict /OKwmText () put"
+*OKwmText WConfidential/CONFIDENTIAL: "userdict /OKwmText (CONFIDENTIAL) put"
+*OKwmText WCopy/COPY: "userdict /OKwmText (COPY) put"
+*OKwmText WDraft/DRAFT: "userdict /OKwmText (DRAFT) put"
+*OKwmText WOriginal/ORIGINAL: "userdict /OKwmText (ORIGINAL) put"
+*OKwmText WTopSecret/TOP SECRET: "userdict /OKwmText (TOP SECRET) put"
+*CloseUI: *OKwmText
+
+*%+++ WaterMark Pages +++++++++++++++++++++++++++++++++++++
+*OpenUI *OKwmLocation/Watermark Pages: PickOne
+*OrderDependency: 67 AnySetup *OKwmLocation
+*DefaultOKwmLocation: AllPages
+*OKwmLocation AllPages/All Pages: "
+  userdict begin
+  true setglobal /OKwm 4 dict dup begin /OKwmOn true def /OKwmOdd true def end def false setglobal
+
+  userdict /OKwmAngle known not {/OKwmAngle 45 def} if
+  userdict /OKwmSize known not {/OKwmSize 48 def} if
+  userdict /OKwmLocation known not {/OKwmLocation true def} if
+  userdict /OKwmDuplex known not {/OKwmDuplex 0 def} if
+
+  /OKwmEOP {OKwmDuplex 0 eq {true}{OKwmDuplex 1 eq OKwmOdd eq dup not {erasepage}if
+    true setglobal /OKwmOdd OKwmOdd not def false setglobal}ifelse} bind def
+  end
+
+  <<
+  /EndPage {userdict begin
+  userdict /OKwmText known OKwm /OKwmOn get and
+    {initmatrix
+     0 setgray 1 setlinewidth true setstrokeadjust 0 setlinejoin 0 setlinecap [] 0 setdash
+     currentpagedevice /PageSize get aload pop 2 div exch 2 div exch translate
+     OKwmAngle rotate /Helvetica-Bold userdict /ARppScale known {OKwmSize ARppScale mul}{OKwmSize}ifelse selectfont
+     OKwmText stringwidth 2 div neg exch 2 div neg exch
+       userdict /ARppScale known {OKwmSize ARppScale mul}{OKwmSize}ifelse .25 mul sub moveto
+     OKwmText false charpath .48 setlinewidth stroke
+     OKwmLocation not {true setglobal OKwm /OKwmOn false put false setglobal} if
+    } if
+    2 eq {pop false}{pop OKwm begin OKwmEOP end} ifelse
+    end } bind
+  >> setpagedevice
+  userdict /OKwmLocation true put"
+*End
+
+*OKwmLocation FirstPage/First Page: "
+  userdict begin
+  true setglobal /OKwm 4 dict dup begin /OKwmOn true def /OKwmOdd true def end def false setglobal
+
+  userdict /OKwmAngle known not {/OKwmAngle 45 def} if
+  userdict /OKwmSize known not {/OKwmSize 48 def} if
+  userdict /OKwmLocation known not {/OKwmLocation true def} if
+  userdict /OKwmDuplex known not {/OKwmDuplex 0 def} if
+
+  /OKwmEOP {OKwmDuplex 0 eq {true}{OKwmDuplex 1 eq OKwmOdd eq dup not {erasepage}if
+    true setglobal /OKwmOdd OKwmOdd not def false setglobal}ifelse} bind def
+  end
+
+  <<
+  /EndPage {userdict begin
+  dup 2 ne {
+  userdict /OKwmText known OKwm /OKwmOn get and
+    {initmatrix
+     0 setgray 1 setlinewidth true setstrokeadjust 0 setlinejoin 0 setlinecap [] 0 setdash
+     currentpagedevice /PageSize get aload pop 2 div exch 2 div exch translate
+     OKwmAngle rotate /Helvetica-Bold userdict /ARppScale known {OKwmSize ARppScale mul}{OKwmSize}ifelse selectfont
+     OKwmText stringwidth 2 div neg exch 2 div neg exch
+       userdict /ARppScale known {OKwmSize ARppScale mul}{OKwmSize}ifelse .25 mul sub moveto
+     OKwmText false charpath .48 setlinewidth stroke
+     OKwmLocation not {true setglobal OKwm /OKwmOn false put false setglobal} if
+    } if
+  } if
+    2 eq {pop false}{pop OKwm begin OKwmEOP end} ifelse
+    end } bind
+  >> setpagedevice
+
+  userdict /OKwmLocation false put"
+*End
+*CloseUI: *OKwmLocation
+
+*%+++ WaterMark Size +++++++++++++++++++++++++++++++++++++
+*OpenUI *OKwmFontSize/Watermark Size: PickOne
+*OrderDependency: 65 AnySetup *OKwmFontSize
+*DefaultOKwmFontSize: pt48
+*OKwmFontSize pt24/24 Points: "userdict /OKwmSize 24 put"
+*OKwmFontSize pt48/48 Points: "userdict /OKwmSize 48 put"
+*OKwmFontSize pt72/72 Points: "userdict /OKwmSize 72 put"
+*CloseUI: *OKwmFontSize
+
+*%+++ WaterMark Angle +++++++++++++++++++++++++++++++++++++
+*OpenUI *OKwmTextAngle/Watermark Angle: PickOne
+*OrderDependency: 65 AnySetup *OKwmTextAngle
+*DefaultOKwmTextAngle: Deg45
+*OKwmTextAngle Deg45/45: "userdict /OKwmAngle 45 put"
+*OKwmTextAngle Deg0/0: "userdict /OKwmAngle 0 put"
+*OKwmTextAngle DegN45/-45: "userdict /OKwmAngle -45 put"
+*CloseUI: *OKwmTextAngle
+
+*% **************************************************************************
+
+
+*CloseGroup: Water
+
+
+*% ==================================================
+*%
+*% Font Information =====================
+
+*FCacheSize 128MB/128 MB RAM: 4000000
+*FCacheSize 384MB/384 MB RAM: 4000000
+*FCacheSize 640MB/640 MB RAM: 4000000
+*FCacheSize 1024MB/1024 MB RAM: 4000000
+
+*DefaultFont: Courier
+*Font AlbertusMT-Italic: Standard "(001.001)" Standard ROM
+*Font AlbertusMT-Light: Standard "(001.001)" Standard ROM
+*Font AlbertusMT: Standard "(001.001)" Standard ROM
+*Font AntiqueOlive-Bold: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Compact: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Italic: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Roman: Standard "(001.002)" Standard ROM
+*Font Apple-Chancery: Standard "(3.0)" Standard ROM
+*Font Arial-BoldItalicMT: Standard "(001.003)" Standard ROM
+*Font Arial-BoldMT: Standard "(001.003)" Standard ROM
+*Font Arial-ItalicMT: Standard "(001.003)" Standard ROM
+*Font ArialMT: Standard "(001.003)" Standard ROM
+*Font AvantGarde-Book: Standard "(003.000)" Standard ROM
+*Font AvantGarde-BookOblique: Standard "(003.000)" Standard ROM
+*Font AvantGarde-Demi: Standard "(003.000)" Standard ROM
+*Font AvantGarde-DemiOblique: Standard "(003.000)" Standard ROM
+*Font Bodoni-Bold: Standard "(001.003)" Standard ROM
+*Font Bodoni-BoldItalic: Standard "(001.003)" Standard ROM
+*Font Bodoni-Italic: Standard "(001.003)" Standard ROM
+*Font Bodoni-Poster: Standard "(001.003)" Standard ROM
+*Font Bodoni-PosterCompressed: Standard "(001.002)" Standard ROM
+*Font Bodoni: Standard "(001.003)" Standard ROM
+*Font Bookman-Demi: Standard "(003.000)" Standard ROM
+*Font Bookman-DemiItalic: Standard "(003.000)" Standard ROM
+*Font Bookman-Light: Standard "(003.000)" Standard ROM
+*Font Bookman-LightItalic: Standard "(003.000)" Standard ROM
+*Font Carta: Special "(001.001)" Special ROM
+*Font Chicago: Standard "(3.0)" Standard ROM
+*Font Clarendon-Bold: Standard "(001.002)" Standard ROM
+*Font Clarendon-Light: Standard "(001.002)" Standard ROM
+*Font Clarendon: Standard "(001.002)" Standard ROM
+*Font CooperBlack-Italic: Standard "(001.004)" Standard ROM
+*Font CooperBlack: Standard "(001.004)" Standard ROM
+*Font Copperplate-ThirtyThreeBC: Standard "(001.003)" Standard ROM
+*Font Copperplate-ThirtyTwoBC: Standard "(001.003)" Standard ROM
+*Font Coronet-Regular: Standard "(001.002)" Standard ROM
+*Font Courier-Bold: Standard "(004.000)" Standard ROM
+*Font Courier-BoldOblique: Standard "(004.000)" Standard ROM
+*Font Courier-Oblique: Standard "(004.000)" Standard ROM
+*Font Courier: Standard "(004.000)" Standard ROM
+*Font Eurostile-Bold: Standard "(001.002)" Standard ROM
+*Font Eurostile-BoldExtendedTwo: Standard "(001.003)" Standard ROM
+*Font Eurostile-ExtendedTwo: Standard "(001.003)" Standard ROM
+*Font Eurostile: Standard "(001.003)" Standard ROM
+*Font Geneva: Standard "(3.0)" Standard ROM
+*Font GillSans-Bold: Standard "(001.002)" Standard ROM
+*Font GillSans-BoldCondensed: Standard "(001.002)" Standard ROM
+*Font GillSans-BoldItalic: Standard "(001.003)" Standard ROM
+*Font GillSans-Condensed: Standard "(001.002)" Standard ROM
+*Font GillSans-ExtraBold: Standard "(001.002)" Standard ROM
+*Font GillSans-Italic: Standard "(001.003)" Standard ROM
+*Font GillSans-Light: Standard "(001.002)" Standard ROM
+*Font GillSans-LightItalic: Standard "(001.003)" Standard ROM
+*Font GillSans: Standard "(001.003)" Standard ROM
+*Font Goudy-Bold: Standard "(001.003)" Standard ROM
+*Font Goudy-BoldItalic: Standard "(001.003)" Standard ROM
+*Font Goudy-ExtraBold: Standard "(001.002)" Standard ROM
+*Font Goudy-Italic: Standard "(001.003)" Standard ROM
+*Font Goudy: Standard "(001.004)" Standard ROM
+*Font Helvetica-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-BoldOblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-BoldObl: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-BoldOblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow: Standard "(003.000)" Standard ROM
+*Font Helvetica-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica: Standard "(003.000)" Standard ROM
+*Font HoeflerText-Black: Standard "(1.0)" Unknown ROM
+*Font HoeflerText-BlackItalic: Standard "(1.0)" Unknown ROM
+*Font HoeflerText-Italic: Standard "(1.0)" Unknown ROM
+*Font HoeflerText-Ornaments: Special "(001.001)" Special ROM
+*Font HoeflerText-Regular: Standard "(1.0)" Unknown ROM
+*Font JoannaMT-Bold: Standard "(001.001)" Standard ROM
+*Font JoannaMT-BoldItalic: Standard "(001.001)" Standard ROM
+*Font JoannaMT-Italic: Standard "(001.001)" Standard ROM
+*Font JoannaMT: Standard "(001.001)" Standard ROM
+*Font LetterGothic-Bold: Standard "(001.007)" Standard ROM
+*Font LetterGothic-BoldSlanted: Standard "(001.006)" Standard ROM
+*Font LetterGothic-Slanted: Standard "(001.005)" Standard ROM
+*Font LetterGothic: Standard "(001.005)" Standard ROM
+*Font LubalinGraph-Book: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-BookOblique: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-Demi: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-DemiOblique: Standard "(001.004)" Standard ROM
+*Font Marigold: Standard "(001.001)" Standard ROM
+*Font Monaco: Standard "(3.0)" Standard ROM
+*Font MonaLisa-Recut: Standard "(001.001)" Standard ROM
+*Font NewCenturySchlbk-Bold: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-BoldItalic: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-Italic: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-Roman: Standard "(003.000)" Standard ROM
+*Font NewYork: Standard "(001.000)" ExtendedRoman ROM
+*Font Optima-Bold: Standard "(001.007)" Standard ROM
+*Font Optima-BoldItalic: Standard "(001.001)" Standard ROM
+*Font Optima-Italic: Standard "(001.001)" Standard ROM
+*Font Optima: Standard "(001.006)" Standard ROM
+*Font Oxford: Standard "(001.001)" Standard ROM
+*Font Palatino-Bold: Standard "(003.000)" Standard ROM
+*Font Palatino-BoldItalic: Standard "(003.000)" Standard ROM
+*Font Palatino-Italic: Standard "(003.000)" Standard ROM
+*Font Palatino-Roman: Standard "(003.000)" Standard ROM
+*Font StempelGaramond-Bold: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-BoldItalic: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-Italic: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-Roman: Standard "(001.003)" Standard ROM
+*Font Symbol: Special "(001.008)" Special ROM
+*Font Tekton: Standard "(001.002)" Standard ROM
+*Font Times-Bold: Standard "(003.000)" Standard ROM
+*Font Times-BoldItalic: Standard "(003.000)" Standard ROM
+*Font Times-Italic: Standard "(003.000)" Standard ROM
+*Font Times-Roman: Standard "(003.000)" Standard ROM
+*Font TimesNewRomanPS-BoldItalicMT: Standard "(001.003)" Standard ROM
+*Font TimesNewRomanPS-BoldMT: Standard "(001.004)" Standard ROM
+*Font TimesNewRomanPS-ItalicMT: Standard "(001.003)" Standard ROM
+*Font TimesNewRomanPSMT: Standard "(001.003)" Standard ROM
+*Font Univers-Bold: Standard "(001.004)" Standard ROM
+*Font Univers-BoldExt: Standard "(001.001)" Standard ROM
+*Font Univers-BoldExtObl: Standard "(001.001)" Standard ROM
+*Font Univers-BoldOblique: Standard "(001.004)" Standard ROM
+*Font Univers-Condensed: Standard "(001.003)" Standard ROM
+*Font Univers-CondensedBold: Standard "(001.002)" Standard ROM
+*Font Univers-CondensedBoldOblique: Standard "(001.002)" Standard ROM
+*Font Univers-CondensedOblique: Standard "(001.003)" Standard ROM
+*Font Univers-Extended: Standard "(001.001)" Standard ROM
+*Font Univers-ExtendedObl: Standard "(001.001)" Standard ROM
+*Font Univers-Light: Standard "(001.004)" Standard ROM
+*Font Univers-LightOblique: Standard "(001.004)" Standard ROM
+*Font Univers-Oblique: Standard "(001.004)" Standard ROM
+*Font Univers: Standard "(001.004)" Standard ROM
+*Font Wingdings-Regular: Special "(Version 2.00)" Special ROM
+*Font Wingdings: Unknown "(001.001)" Unknown ROM
+*Font ZapfChancery-MediumItalic: Standard "(003.000)" Standard ROM
+*Font ZapfDingbats: Special "(002.000)" Special ROM
+
+
+*% =======================================================
+*%		UI Constraints
+*% =======================================================
+
+*% =======================================================
+*%
+*% ----- If Tray3 option not installed, can't select Tray3
+
+*UIConstraints: *OKOptionTray   3      *InputSlot Optional_Tray4
+*UIConstraints: *InputSlot Optional_Tray4 *OKOptionTray 3
+
+*% =======================================================
+*%
+*% ----- If Tray4 option not installed, can't select Tray4
+*%
+*UIConstraints: *OKOptionTray 2             *InputSlot Optional_Tray3
+*UIConstraints: *InputSlot Optional_Tray3  *OKOptionTray 2
+
+*UIConstraints: *OKOptionTray 2             *InputSlot Optional_Tray4
+*UIConstraints: *InputSlot Optional_Tray4  *OKOptionTray 2
+
+*% ==================================================
+*%
+*% ----- If Duplex option not installed, can't select duplex
+*%
+
+*UIConstraints: *Option1 False		*Duplex DuplexTumble
+*UIConstraints: *Option1 False		*Duplex DuplexNoTumble
+
+*UIConstraints: *Duplex DuplexTumble	*Option1 False	
+*UIConstraints: *Duplex DuplexNoTumble	*Option1 False	
+
+
+*% ==================================================
+*%
+*% ----- If Duplex, can't select any Media type of
+*%       Transparency, Label Media, or Cardstock
+
+*UIConstraints: *Duplex			*MediaType TRANSPARENCY
+*UIConstraints: *Duplex			*MediaType LABEL
+*UIConstraints: *Duplex			*MediaType CARDSTOCK
+
+*UIConstraints: *MediaType TRANSPARENCY *Duplex	
+*UIConstraints: *MediaType LABEL        *Duplex	
+*UIConstraints: *MediaType CARDSTOCK    *Duplex	
+
+*% ==================================================
+*%
+*% ----- If Duplex, can't select any Envelope size
+
+*UIConstraints: *Duplex		      *PageSize Env9
+*UIConstraints: *Duplex		      *PageSize Env10
+*UIConstraints: *Duplex		      *PageSize EnvC5
+*UIConstraints: *Duplex		      *PageSize EnvDL
+*UIConstraints: *Duplex		      *PageSize EnvMonarch
+
+*UIConstraints: *PageSize Env9        *Duplex
+*UIConstraints: *PageSize Env10       *Duplex
+*UIConstraints: *PageSize EnvC5       *Duplex
+*UIConstraints: *PageSize EnvDL       *Duplex
+*UIConstraints: *PageSize EnvMonarch  *Duplex
+
+*UIConstraints: *Duplex		      *PageRegion Env9
+*UIConstraints: *Duplex		      *PageRegion Env10
+*UIConstraints: *Duplex		      *PageRegion EnvC5
+*UIConstraints: *Duplex		      *PageRegion EnvDL
+*UIConstraints: *Duplex		      *PageRegion EnvMonarch
+
+*UIConstraints: *PageRegion Env9        *Duplex
+*UIConstraints: *PageRegion Env10       *Duplex
+*UIConstraints: *PageRegion EnvC5       *Duplex
+*UIConstraints: *PageRegion EnvDL       *Duplex
+*UIConstraints: *PageRegion EnvMonarch  *Duplex
+
+*% Optional Offset Stacker Constraints
+*UIConstraints: *OffsetCatchTray False *OutputBin OffsetTray
+*UIConstraints: *OutputBin OffsetTray *OffsetCatchTray False
+
+*% Jogging constraints
+*UIConstraints: *OutputBin FaceDown *Jog EndOfJob
+*UIConstraints: *Jog EndOfJob *OutputBin FaceDown 
+
+*Message: "%%[ exitserver: permanent state may be changed ]%%"
+*Message: "%%[ Flushing: rest of job (to end-of-file) will be ignored ]%%"
+*Message: "\FontName\ not found, using Courier"
+
+*Status: "initializing"
+*Status: "idle"
+*Status: "busy"
+*Status: "waiting"
+*Status: "online"
+
+*Source: "AppleTalk"
+*Source: "Parallel"
+*Source: "EtherTalk"
+*Source: "USB"
+
+*% end of PPD 

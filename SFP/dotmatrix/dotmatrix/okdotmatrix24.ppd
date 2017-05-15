@@ -1,0 +1,129 @@
+*PPD-Adobe: "4.3"
+
+*% ==========================================================
+*% Printer Description File for OKI dot matrix
+*% Copyright (C) 2010 Oki Data Corporation
+*%
+*% ==========================================================
+*% Note)
+*% This PostScript Printer Description(PPD) file is free software; you
+*% can redistribute it and/or modify it under the terms of the GNU
+*% General Public License version 2 or later as published by the Free
+*% Software Foundation.
+*%
+*% In addition to the permissions in the GNU General Public License,
+*% Oki Data Corporation gives you unlimited permission to link the
+*% PostScript code fragments herein into your PostScript documents to
+*% form an excutable for enabling printer-specific features, and
+*% distribute those combinations without any restrictions from the use
+*% of this PPD file. (The General Public License restrictions do apply
+*% in other respects; for example, they cover modification of the
+*% file, and distribution when not merged into a PostScript document.)
+*%
+*% This PPD is distributed in the hope that it will be useful, but
+*% WITHOUT ANY WARRANTY; without even the implied warranty of
+*% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*% General Public License for more details.
+*%
+*% You should have received a copy of the GNU General Public License
+*% along with this PPD; see the file COPYING.
+*%
+*%
+*% ==========================================================
+*FormatVersion:	"4.3"
+*FileVersion:	"2.0"
+*LanguageVersion: English 
+*LanguageEncoding: ISOLatin1
+*PCFileName:	"OKDOTM24.PPD"
+*Manufacturer:	"OKI"
+*Product:	"(24 PIN SIDM)"
+*cupsVersion:	1.1
+*cupsManualCopies: False
+*cupsModelNumber: 2
+*cupsFilter:	"application/vnd.cups-postscript 0 rastertookidotmatrix"
+*ModelName:     "OKI 24 Pin"
+*ShortNickName: "OKI 24 Pin"
+*NickName:      "OKI 24 Pin Dot Matrix"
+*PSVersion:	"(3010.000) 550"
+*LanguageLevel:	"2"
+*ColorDevice:	False
+*DefaultColorSpace: Gray
+*FileSystem:	False
+*Throughput:	"1"
+*LandscapeOrientation: Plus90
+*VariablePaperSize: True
+*TTRasterizer:	Type42
+
+*OpenUI *PageSize/Media Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: Letter
+*PageSize A4/A4: "<</PageSize[595 842]>>setpagedevice"
+*PageSize Legal/Legal: "<</PageSize[612 1008]>>setpagedevice"
+*PageSize Letter/Letter: "<</PageSize[612 792]>>setpagedevice"
+*PageSize Wide132/Wide: "<</PageSize[1071 792]>>setpagedevice"
+*CloseUI: *PageSize
+
+*OpenUI *PageRegion: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: Letter
+*PageRegion A4/A4: "<</PageRegion[595 842]>>setpagedevice"
+*PageRegion Legal/Legal: "<</PageRegion[612 1008]>>setpagedevice"
+*PageRegion Letter/Letter: "<</PageRegion[612 792]>>setpagedevice"
+*PageRegion Wide132/Wide: "<</PageRegion[1071 792]>>setpagedevice"
+*CloseUI: *PageRegion
+
+*DefaultImageableArea: Letter 
+*ImageableArea Letter:	"18.0 18.0 594.0 774.0"
+*ImageableArea Legal:	"18.0 18.0 594.0 990.0"
+*ImageableArea A4:	"18.0 18.0 577.0 824.0"
+*ImageableArea Wide132: "18.00 18.00 1053.00 774.00"
+
+*DefaultPaperDimension: Letter
+*PaperDimension Letter:	"612 792"
+*PaperDimension Legal:	"612 1008"
+*PaperDimension A4:	"595 842"
+*PaperDimension Wide132: "1071 792"
+
+*OpenUI *Resolution/Quality: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*DefaultResolution: 180x180dpi
+*Resolution 120x180dpi/120x180: ""
+*Resolution 180x180dpi/180x180: ""
+*Resolution 360x180dpi/360x180: ""
+*Resolution 360x360dpi/360x360: ""
+*CloseUI: *Resolution
+
+*DefaultFont: Courier
+*Font AvantGarde-Book: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-BookOblique: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-Demi: Standard "(001.007S)" Standard ROM
+*Font AvantGarde-DemiOblique: Standard "(001.007S)" Standard ROM
+*Font Bookman-Demi: Standard "(001.004S)" Standard ROM
+*Font Bookman-DemiItalic: Standard "(001.004S)" Standard ROM
+*Font Bookman-Light: Standard "(001.004S)" Standard ROM
+*Font Bookman-LightItalic: Standard "(001.004S)" Standard ROM
+*Font Courier: Standard "(002.004S)" Standard ROM
+*Font Courier-Bold: Standard "(002.004S)" Standard ROM
+*Font Courier-BoldOblique: Standard "(002.004S)" Standard ROM
+*Font Courier-Oblique: Standard "(002.004S)" Standard ROM
+*Font Helvetica: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Narrow-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-Oblique: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Oblique: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Bold: Standard "(001.009S)" Standard ROM
+*Font NewCenturySchlbk-BoldItalic: Standard "(001.007S)" Standard ROM
+*Font NewCenturySchlbk-Italic: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Roman: Standard "(001.007S)" Standard ROM
+*Font Palatino-Bold: Standard "(001.005S)" Standard ROM
+*Font Palatino-BoldItalic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Italic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Roman: Standard "(001.005S)" Standard ROM
+*Font Times-Bold: Standard "(001.007S)" Standard ROM
+*Font Times-BoldItalic: Standard "(001.009S)" Standard ROM
+*Font Times-Italic: Standard "(001.007S)" Standard ROM
+*Font Times-Roman: Standard "(001.007S)" Standard ROM
+*%

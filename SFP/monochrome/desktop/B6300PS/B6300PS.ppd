@@ -1,0 +1,1459 @@
+*PPD-Adobe: "4.3"
+*% ==========================================================
+*% Printer Description File for OKI B6300
+*% Copyright (C) 2006  Oki Data Corporation
+*% ==========================================================
+*% Note)
+*% This PostScript Printer Description(PPD) file is free software; you
+*% can redistribute it and/or modify it under the terms of the GNU
+*% General Public License version 2 or later as published by the Free
+*% Software Foundation.
+*%
+*% In addition to the permissions in the GNU General Public License,
+*% Oki Data Corporation gives you unlimited permission to link the
+*% PostScript code fragments herein into your PostScript documents to
+*% form an excutable for enabling printer-specific features, and
+*% distribute those combinations without any restrictions from the use
+*% of this PPD file. (The General Public License restrictions do apply
+*% in other respects; for example, they cover modification of the
+*% file, and distribution when not merged into a PostScript document.)
+*%
+*% This PPD is distributed in the hope that it will be useful, but
+*% WITHOUT ANY WARRANTY; without even the implied warranty of
+*% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*% General Public License for more details.
+*%
+*% You should have received a copy of the GNU General Public License
+*% along with this PPD; see the file COPYING.
+*%
+*%
+*% ==========================================================
+*FormatVersion: "4.3"
+*FileVersion: "1.0"
+*LanguageEncoding: ISOLatin1
+*LanguageVersion: English
+*PCFileName: "B6300PS.PPD"
+*Product: "(B6300)"
+*PSVersion: "(3015.102) 3"
+*Manufacturer: "Oki"
+*ModelName: "OKI B6300"
+*ShortNickName: "OKI B6300"
+*NickName: "OKI B6300"
+*cupsVersion: 1.1
+*cupsManualCopies: False
+*cupsFilter:	"application/vnd.cups-postscript 0 okijobaccounting"
+
+*% ==== Device Capabilities ===============
+*LanguageLevel: "3"
+*Protocols: PJL TBCP
+
+*%=== JCL Features ==========================
+*JCLBegin: "<1B>%-12345X@PJL COMMENT OKI B6300 PostScript v1.0<0A>"
+*JCLToPSInterpreter: "@PJL RDYMSG DISPLAY = <22><22><0A>@PJL ENTER LANGUAGE = POSTSCRIPT <0A>"
+*JCLEnd: "<1B>%-12345X<1B>%-12345X@PJL EOJ <0A>"
+*%===========================================
+
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*VariablePaperSize: True
+*LandscapeOrientation: Plus90
+*TTRasterizer: Type42
+
+*Throughput: "34"
+
+*SuggestedJobTimeout: "0"
+*SuggestedWaitTimeout: "300"
+*PrintPSErrors: True
+
+
+*% === Options and Constraints =========
+*OpenGroup: InstallableOptions/OKI Options Installed
+
+*OpenUI *Option2/Duplexer: Boolean
+*DefaultOption2: False
+*Option2 True/Installed: ""
+*Option2 False/Not Installed: ""
+*CloseUI: *Option2
+
+*OpenUI *Option4/Catch Tray: Boolean
+*DefaultOption4: False
+*Option4 True/Installed: ""
+*Option4 False/Not Installed: ""
+*CloseUI: *Option4
+
+*OpenUI *Option5/Rear Tray: Boolean
+*DefaultOption5: False
+*Option5 True/Installed: ""
+*Option5 False/Not Installed: ""
+*CloseUI: *Option5
+
+*OpenUI *Option6/Available Tray: PickOne
+*DefaultOption6: None
+*Option6 None/1: ""
+*Option6 3Tray/2: ""
+*Option6 4Tray/3: ""
+*CloseUI: *Option6
+
+*CloseGroup: InstallableOptions
+
+*% === Job Patch File ===============
+*JobPatchFile 0: "
+"
+*End
+
+*OpenUI *Duplex/2-Sided Printing:  PickOne
+*OrderDependency: 110.0 AnySetup *Duplex
+*DefaultDuplex: None
+*Duplex None/Off: "
+1 dict
+dup /Duplex false put
+setpagedevice
+"
+*End
+*Duplex DuplexNoTumble/Long-Edge Binding: "
+2 dict dup /Duplex true put
+dup /Tumble false put setpagedevice
+"
+*End
+*Duplex DuplexTumble/Short-Edge Binding: "
+2 dict dup /Duplex true put
+dup /Tumble true put setpagedevice
+"
+*End
+*CloseUI: *Duplex
+
+*OpenUI *InputSlot/Paper Source: PickOne
+*OrderDependency: 50.0 AnySetup *InputSlot
+*DefaultInputSlot: MediaTypeAPS
+*InputSlot MediaTypeAPS/Auto: "
+2 dict begin
+/MediaPosition null def
+/DeferredMediaSelection true def
+currentdict end setpagedevice
+"
+*End
+*InputSlot 1stTray/Tray 1: "
+2 dict begin
+/MediaPosition 0 def
+/DeferredMediaSelection true def
+currentdict end setpagedevice
+"
+*End
+*InputSlot 2ndTray/Tray 2: "
+2 dict begin
+/MediaPosition 1 def
+/DeferredMediaSelection true def
+currentdict end setpagedevice
+"
+*End
+*InputSlot 3rdTray/Tray 3: "
+2 dict begin
+/MediaPosition 2 def
+/DeferredMediaSelection true def
+currentdict end setpagedevice
+"
+*End
+*InputSlot 4thTray/Tray 4: "
+2 dict begin
+/MediaPosition 3 def
+/DeferredMediaSelection true def
+currentdict end setpagedevice
+"
+*End
+*CloseUI: *InputSlot
+
+
+*% Paper Handling ===================
+
+*RequiresPageRegion 1stTray: True
+*RequiresPageRegion 2ndTray: True
+*RequiresPageRegion 3rdTray: True
+*RequiresPageRegion 4thTray: True
+*RequiresPageRegion MediaTypeAPS: True
+
+*% Code in this section both selects a tray and sets up a frame buffer.
+*OpenUI *PageSize: PickOne
+*OrderDependency: 60.0 AnySetup *PageSize
+*DefaultPageSize: Letter
+*PageSize A4/A4: "
+6 dict dup /PageSize [595 842] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize A5/A5: "
+6 dict dup /PageSize [420 595] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize A6/A6: "
+6 dict dup /PageSize [297 420] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize B5/B5: "
+6 dict dup /PageSize [516 729] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize EnvC5/C5: "
+6 dict dup /PageSize [459 649] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize Env10/Com-10: "
+6 dict dup /PageSize [297 684] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize EnvDL/DL: "
+6 dict dup /PageSize [312 624] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize Executive/Executive: "
+6 dict dup /PageSize [522 756] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize Legal/Legal: "
+6 dict dup /PageSize [612 1008] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize FanFoldGermanLegal/Legal 13: "
+6 dict dup /PageSize [612 936] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize Letter/Letter: "
+6 dict dup /PageSize [612 792] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageSize EnvMonarch/Monarch: "
+6 dict dup /PageSize [279 540] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaPosition null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*CloseUI: *PageSize
+
+*OpenUI *PageRegion:  PickOne
+*OrderDependency: 80.0 AnySetup *PageRegion
+*DefaultPageRegion: Letter
+*PageRegion A4/A4 210 x 297mm: "
+6 dict dup /PageSize [595 842] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion A5/A5 148 x 210mm: "
+6 dict dup /PageSize [420 595] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+/MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion A6/A6 105 x 148mm: "
+6 dict dup /PageSize [297 420] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion B5/B5 182 x 257mm: "
+6 dict dup /PageSize [516 729] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion Letter/Letter 8.5 x 11in: "
+6 dict dup /PageSize [612 792] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion FanFoldGermanLegal/Legal13 8.5 x 13in: "
+6 dict dup /PageSize [612 936] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion Legal/Legal 8.5 x 14in: "
+6 dict dup /PageSize [612 1008] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion Executive/Executive 7.25 x 10.5in: "
+6 dict dup /PageSize [522 756] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion EnvMonarch/Monarch 3.875 x 7.5in: "
+6 dict dup /PageSize [279 540] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion Env10/Com-10 4.125 x 9.5in: "
+6 dict dup /PageSize [297 684] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion EnvDL/DL 110 x 220mm: "
+6 dict dup /PageSize [312 624] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*PageRegion EnvC5/C5 162 x 229mm: "
+6 dict dup /PageSize [459 649] put dup /ImagingBBox null put
+dup /LeadingEdge null put
+dup /MediaClass null put currentpagedevice
+/Policies 2 copy known
+{get /PageSize 2 copy known
+{get dup 3 ge exch 6 le and {dup /DeferredMediaSelection false put} if}
+{pop pop} ifelse
+}{pop pop} ifelse setpagedevice
+"
+*End
+*CloseUI: *PageRegion
+
+*% The following entries provide information about specific paper keywords.
+*DefaultImageableArea: Letter
+*ImageableArea A4/A4 210 x 297mm: "11.62 11.62 583.65 830.27 "
+*ImageableArea A5/A5 148 x 210mm: "11.62 11.62 407.91 583.65 "
+*ImageableArea A6/A6 105 x 148mm: "11.62 11.62 286.02 407.91 "
+*ImageableArea B5/B5 182 x 257mm: "11.62 11.62 504.28 716.88 "
+*ImageableArea Letter/Letter 8.5 x 11in: "11.62 11.62 600.38 780.38 "
+*ImageableArea FanFoldGermanLegal/Legal13 8.5 x 13in: "11.62 11.62 600.38 924.38 "
+*ImageableArea Legal/Legal 8.5 x 14in: "11.62 11.62 600.38 996.38 "
+*ImageableArea Executive/Executive 7.25 x 10.5in: "11.62 11.62 510.52 744.38"
+*ImageableArea EnvMonarch/Monarch 3.875 x 7.5in: "11.40 11.40 267.48 528.60"
+*ImageableArea Env10/Com-10 4.125 x 9.5in: "11.52 11.40 285.60 672.60"
+*ImageableArea EnvDL/DL 110 x 220mm: "11.40 11.50 300.36 612.22"
+*ImageableArea EnvC5/C5 162 x 229mm: "11.40 11.69 447.72 637.85"
+
+*% These provide the physical dimensions of the paper (by keyword)
+*DefaultPaperDimension: Letter
+*PaperDimension A4/A4 210 x 297mm: "595 842"
+*PaperDimension A5/A5 148 x 210mm: "420 595"
+*PaperDimension A6/A6 105 x 148mm: "297 420"
+*PaperDimension B5/B5 182 x 257mm: "516 729"
+*PaperDimension Letter/Letter 8.5 x 11in: "612 792"
+*PaperDimension FanFoldGermanLegal/Legal13 8.5 x 13in: "612 936"
+*PaperDimension Legal/Legal 8.5 x 14in: "612 1008"
+*PaperDimension Executive/Executive 7.25 x 10.5in: "522 756"
+*PaperDimension EnvMonarch/Monarch 3.875 x 7.5in: "279 540"
+*PaperDimension Env10/Com-10 4.125 x 9.5in: "297 684"
+*PaperDimension EnvDL/DL 110 x 220mm: "312 624"
+*PaperDimension EnvC5/C5 162 x 229mm: "459 649"
+
+
+*OpenGroup: Misc/OKI Job Option
+
+*% __________________________________________________________
+*% ----------------------- Resolution -----------------------
+*OpenUI *OKOutputMode/Quality:PickOne
+*OrderDependency: 10.0 AnySetup *OKOutputMode
+*DefaultOKOutputMode: 600x600
+*OKOutputMode 1200x1200/Fine: "
+    1 dict dup /HWResolution [1200 1200] put
+    setpagedevice
+"
+*End
+*OKOutputMode 600x600/Normal: "
+    1 dict dup /HWResolution [600 600] put
+    setpagedevice
+"
+*End
+*CloseUI: *OKOutputMode
+
+*% __________________________________________________________
+*% ----------------------- MediaType -----------------------
+*OpenUI *MediaType/Media Type:  PickOne
+*OrderDependency: 90.0 AnySetup *MediaType
+*DefaultMediaType: Default
+*MediaType ThickPaper/Heavy 1: "1 dict dup /MediaClass (thick1) put setpagedevice"
+*MediaType ThickPaper2/Heavy 2: "1 dict dup /MediaClass (thick2) put setpagedevice"
+*MediaType Stationary/Plain: "1 dict dup /MediaClass (stationary) put setpagedevice"
+*MediaType Default/Printer Setting: ""
+*MediaType RecyclePaper/Recycled: "1 dict dup /MediaClass (recycled) put setpagedevice"
+*MediaType Transparency/Transparency: "1 dict dup /MediaClass (transparency) put setpagedevice"
+*MediaType CustomSizedPaper1/Custom 1: "1 dict dup /MediaClass (user1) put setpagedevice"
+*MediaType CustomSizedPaper2/Custom 2: "1 dict dup /MediaClass (user2) put setpagedevice"
+*MediaType CustomSizedPaper3/Custom 3: "1 dict dup /MediaClass (user3) put setpagedevice"
+*MediaType CustomSizedPaper4/Custom 4: "1 dict dup /MediaClass (user4) put setpagedevice"
+*MediaType CustomSizedPaper5/Custom 5: "1 dict dup /MediaClass (user5) put setpagedevice"
+*CloseUI: *MediaType
+
+
+*OpenUI *OKHalftone/Halftone: PickOne
+*OrderDependency: 20.0 AnySetup *OKHalftone
+*DefaultOKHalftone: Spot
+*OKHalftone Spot/Fine Dots: "
+1 dict dup /MaxSuperScreen 1024 put setuserparams
+2 dict dup /PostRenderingEnhance true put
+dup /PostRenderingEnhanceDetails 2 dict dup /Type 32 put dup /EngineScreen 1 put put
+setpagedevice
+"
+*End
+*OKHalftone Spot256/Thick Dots: "
+1 dict dup /MaxSuperScreen 1024 put setuserparams
+2 dict dup /PostRenderingEnhance true put
+dup /PostRenderingEnhanceDetails 2 dict dup /Type 32 put dup /EngineScreen 0 put put
+setpagedevice
+"
+*End
+*OKHalftone Auto/Other: "
+2 dict dup /PostRenderingEnhance true put
+dup /PostRenderingEnhanceDetails 2 dict dup /Type 32 put dup /EngineScreen 2 put put
+setpagedevice
+"
+*End
+*CloseUI: *OKHalftone
+
+*% __________________________________________________________
+*% ----------------------- Tone Saving -----------------------
+*OpenUI *OKTonerSaver/Toner Saving:  Boolean
+*OrderDependency: 29.0 AnySetup *OKTonerSaver
+*DefaultOKTonerSaver: False
+*OKTonerSaver True/Yes:  "1 dict dup /PostRenderingEnhanceDetails 2 dict dup /Type 32 put dup /TonerSaver 1 put put setpagedevice"
+*OKTonerSaver False/No: "1 dict dup /PostRenderingEnhanceDetails 2 dict dup /Type 32 put dup /TonerSaver 0 put put setpagedevice"
+*CloseUI: *OKTonerSaver
+
+*OpenUI *Smoothing/Image Enhancement : Boolean
+*OrderDependency: 180.0 AnySetup *Smoothing
+*DefaultSmoothing: True
+*Smoothing True/Yes: "
+2 dict dup /PostRenderingEnhance true put
+dup /PostRenderingEnhanceDetails 2 dict
+dup /Type 32 put
+dup /REValue 1 put
+put setpagedevice
+"
+*End
+*Smoothing False/No: "
+2 dict dup /PostRenderingEnhance true put
+dup /PostRenderingEnhanceDetails 2 dict
+dup /Type 32 put
+dup /REValue 0 put
+put setpagedevice
+"
+*End
+*CloseUI: *Smoothing
+
+
+*OpenUI *OKCustomPageSizeCorrection/Custom Paper Auto Orientation: Boolean
+*OrderDependency: 1.0 Prolog *OKCustomPageSizeCorrection
+*DefaultOKCustomPageSizeCorrection: True
+*OKCustomPageSizeCorrection True/Yes: "userdict /4.3PPDCompliant false put"
+*OKCustomPageSizeCorrection False/No: "userdict /4.3PPDCompliant true put"
+*CloseUI: *OKCustomPageSizeCorrection
+
+*CloseGroup: Misc
+
+
+*% ==========================================================
+*% ----------------------- Finisher Group -----------------------
+*% ==========================================================
+
+
+*OpenGroup: Finisher_Option/OKI Finisher
+
+*OpenUI *Jog/Jog :  PickOne
+*OrderDependency: 140.0 AnySetup *Jog
+*DefaultJog: None
+*Jog None: "1 dict dup /Jog 0 put setpagedevice"
+*Jog DeviceDeactivation/Job: "
+/Custom /ProcSet resourcestatus
+{ pop pop /Custom /ProcSet findresource dup /setjobinstruction known
+{/setjobinstruction get 1 dict begin /Jog true def currentdict end exch exec} if
+}if
+"
+*End
+*Jog EndOfSet/Set: "1 dict dup /Jog 3 put setpagedevice"
+*CloseUI: *Jog
+
+
+*% SlipSheet Information ===================
+*OpenUI *OKSlipSheet/Separators Source:  PickOne
+*OrderDependency: 120.0 AnySetup *OKSlipSheet
+*DefaultOKSlipSheet: OFF
+*OKSlipSheet AutoTray/Auto: "
+2 dict dup dup /SlipSheet 4 put
+/SlipSheetDetails 2 dict dup /AutoTraySelect 1 put dup /Type 1 put
+put setpagedevice "
+*End
+*OKSlipSheet OFF/None:  "1 dict dup /SlipSheet 0 put setpagedevice "
+*OKSlipSheet 1stTray/Tray 1: "
+2 dict dup dup /SlipSheet 4 put
+/SlipSheetDetails 3 dict dup /AutoTraySelect 0 put
+dup /Type 1 put dup
+/SheetTray 0 put put setpagedevice "
+*End
+*OKSlipSheet 2ndTray/Tray 2: "
+2 dict dup dup /SlipSheet 4 put
+/SlipSheetDetails 3 dict dup /AutoTraySelect 0 put
+dup /Type 1 put dup
+/SheetTray 1 put put setpagedevice "
+*End
+*OKSlipSheet 3rdTray/Tray 3: "
+2 dict dup dup /SlipSheet 4 put
+/SlipSheetDetails 3 dict dup /AutoTraySelect 0 put
+dup /Type 1 put dup
+/SheetTray 2 put put setpagedevice "
+*End
+*OKSlipSheet 4thTray/Tray 4: "
+2 dict dup dup /SlipSheet 4 put
+/SlipSheetDetails 3 dict dup /AutoTraySelect 0 put
+dup /Type 1 put dup
+/SheetTray 3 put put setpagedevice "
+*End
+*CloseUI: *OKSlipSheet
+
+
+*OpenUI *OKSlipSheetPrint/Separator:  Boolean
+*OrderDependency: 119.0 AnySetup *OKSlipSheetPrint
+*DefaultOKSlipSheetPrint: False
+*OKSlipSheetPrint False/Blank: "
+/Custom /ProcSet resourcestatus {
+pop pop /Custom/ProcSet findresource dup /setjobinstruction known {
+begin
+1 dict dup/Interleaf 0 put setjobinstruction
+end
+}{pop} ifelse
+} if
+"
+*End
+*OKSlipSheetPrint True/Printed: "
+/Custom /ProcSet resourcestatus {
+pop pop /Custom/ProcSet findresource dup /setjobinstruction known {
+begin
+1 dict dup/Interleaf 1 put setjobinstruction
+end
+}{pop} ifelse
+} if
+"
+*End
+
+*CloseUI: *OKSlipSheetPrint
+
+*% __________________________________________________________
+*% ----------------------- OutputBin -----------------------
+*OpenUI *OutputBin/Output Tray: PickOne
+*OrderDependency: 130.0 AnySetup *OutputBin
+*DefaultOutputBin:  CenterTray
+*OutputBin OCT/Catch: "
+  currentpagedevice /OutputAttributes get dup 2 known 
+  {2 get dup null eq 
+   { pop } 
+   { dup length dict copy 
+     setpagedevice
+   } ifelse }
+  {pop}
+  ifelse
+"
+*End
+*OutputBin CenterTray/Center: "
+  currentpagedevice /OutputAttributes get dup 0 known 
+  {0 get dup null eq 
+   { pop } 
+   { dup length dict copy 
+     setpagedevice
+   } ifelse }
+  {pop}
+  ifelse
+"
+*End
+*OutputBin RearTray/Rear: "
+  currentpagedevice /OutputAttributes get dup 1 known 
+  {1 get dup null eq 
+   { pop } 
+   { dup length dict copy 
+     setpagedevice
+   } ifelse }
+  {pop}
+  ifelse
+"
+*End
+*CloseUI: *OutputBin
+
+
+*OpenUI *OKSubPaperSelection/Substitute Tray: PickOne
+*OrderDependency: 32.0 AnySetup *OKSubPaperSelection
+*DefaultOKSubPaperSelection: Policy0
+*OKSubPaperSelection Policy0/Use Printer Settings: "
+"
+*End
+*OKSubPaperSelection Policy2/Display Message: "
+2 dict dup /Policies 1 dict dup /PageSize 1 put put
+dup /DeferredMediaSelection true put setpagedevice
+"
+*End
+*OKSubPaperSelection Policy5/Nearest Size (No Zoom): "
+2 dict dup /Policies 1 dict dup /PageSize 5 put put
+dup /DeferredMediaSelection false put setpagedevice
+"
+*End
+*OKSubPaperSelection Policy3/Nearest Size (With Zoom): "
+2 dict dup /Policies 1 dict dup /PageSize 3 put put
+dup /DeferredMediaSelection false put setpagedevice
+"
+*End
+*OKSubPaperSelection Policy6/Larger Size (No Zoom): "
+2 dict dup /Policies 1 dict dup /PageSize 6 put put
+dup /DeferredMediaSelection false put setpagedevice
+"
+*End
+*OKSubPaperSelection Policy4/Larger Size (With Zoom): "
+2 dict dup /Policies 1 dict dup /PageSize 4 put put
+dup /DeferredMediaSelection false put setpagedevice
+"
+*End
+*CloseUI: *OKSubPaperSelection
+
+
+
+*CloseGroup: Finisher_Option
+
+*% ==========================================================
+*% ----------------------- Misc Group -----------------------
+*% ==========================================================
+
+
+
+*AccurateScreensSupport: True
+
+
+*% Halftone Information ===============
+*DefaultHalftoneType: 1
+*ScreenFreq: "85.0"
+*ScreenAngle: "45.0"
+*DefaultScreenProc: Dot
+*ScreenProc Dot: "{180 mul cos exch 180 mul cos add 2 div} bind"
+*ScreenProc Line: "{ pop }"
+*ScreenProc Ellipse: "{ dup 5 mul 8 div mul exch dup mul exch add sqrt 1 exch sub }"
+*DefaultTransfer: Null
+*Transfer Null: "{ }"
+*Transfer Null.Inverse: "{ 1 exch sub }"
+
+*% CustomPageSize Information ===========
+
+
+*HWMargins: 11.62 11.62 11.62 11.62
+*LeadingEdge Short: ""
+*DefaultLeadingEdge: Short
+*MaxMediaWidth: "612"
+*MaxMediaHeight: "1008"
+*NonUIOrderDependency: 35.0 AnySetup *CustomPageSize
+*CustomPageSize True: "
+userdict /4.3PPDCompliant known
+{userdict /4.3PPDCompliant get } {false} ifelse
+{ % From Print Managers complying with 4.3 PPD Spec.
+pop pop pop % discard orientation & offsets
+3 dict begin
+/PageSize [
+4 -2 roll
+] def
+/ImagingBBox null def
+currentdict end setpagedevice
+}{ % From Print Managers not complying with 4.3 PPD Spec.
+pop pop pop % discard orientation & offsets
+3 dict begin
+/PageSize [
+4 -2 roll exch
+] def
+/ImagingBBox null def
+currentdict end setpagedevice
+} ifelse"
+*End
+*ParamCustomPageSize Height:       1 points 360 1008
+*ParamCustomPageSize Width:        2 points 214 612
+*ParamCustomPageSize WidthOffset:  3 points 0 0
+*ParamCustomPageSize HeightOffset: 4 points 0 0
+*ParamCustomPageSize Orientation:  5 int 1 1
+
+
+*% Font Information =====================
+
+*FCacheSize 128Meg: 3355443
+*FCacheSize 256Meg: 3355443
+*FCacheSize 384Meg: 3355443
+*FCacheSize 640Meg: 3355443
+
+*DefaultFont: Courier
+
+*Font AlbertusMT-Italic: Standard "(001.001)" Standard ROM
+*Font AlbertusMT-Light: Standard "(001.001)" Standard ROM
+*Font AlbertusMT: Standard "(001.001)" Standard ROM
+*Font AntiqueOlive-Bold: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Compact: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Italic: Standard "(001.002)" Standard ROM
+*Font AntiqueOlive-Roman: Standard "(001.002)" Standard ROM
+*Font Apple-Chancery: Standard "(001.002)" ExtendedRoman ROM
+*Font Arial-BoldItalicMT: Standard "(001.003)" Standard ROM
+*Font Arial-BoldMT: Standard "(001.003)" Standard ROM
+*Font Arial-ItalicMT: Standard "(001.003)" Standard ROM
+*Font ArialMT: Standard "(001.003)" Standard ROM
+*Font AvantGarde-Book: Standard "(003.000)" Standard ROM
+*Font AvantGarde-BookOblique: Standard "(003.000)" Standard ROM
+*Font AvantGarde-Demi: Standard "(003.000)" Standard ROM
+*Font AvantGarde-DemiOblique: Standard "(003.000)" Standard ROM
+*Font Bodoni-Bold: Standard "(001.003)" Standard ROM
+*Font Bodoni-BoldItalic: Standard "(001.003)" Standard ROM
+*Font Bodoni-Italic: Standard "(001.003)" Standard ROM
+*Font Bodoni-Poster: Standard "(001.003)" Standard ROM
+*Font Bodoni-PosterCompressed: Standard "(001.002)" Standard ROM
+*Font Bodoni: Standard "(001.003)" Standard ROM
+*Font Bookman-Demi: Standard "(003.000)" Standard ROM
+*Font Bookman-DemiItalic: Standard "(003.000)" Standard ROM
+*Font Bookman-Light: Standard "(003.000)" Standard ROM
+*Font Bookman-LightItalic: Standard "(003.000)" Standard ROM
+*Font Carta: Special "(001.001)" Special ROM
+*Font Chicago: Standard "(001.000)" ExtendedRoman ROM
+*Font Clarendon-Bold: Standard "(001.002)" Standard ROM
+*Font Clarendon-Light: Standard "(001.002)" Standard ROM
+*Font Clarendon: Standard "(001.002)" Standard ROM
+*Font CooperBlack-Italic: Standard "(001.004)" Standard ROM
+*Font CooperBlack: Standard "(001.004)" Standard ROM
+*Font Copperplate-ThirtyThreeBC: Standard "(001.003)" Standard ROM
+*Font Copperplate-ThirtyTwoBC: Standard "(001.003)" Standard ROM
+*Font Coronet-Regular: Standard "(001.002)" Standard ROM
+*Font Courier-Bold: Standard "(004.000)" Standard ROM
+*Font Courier-BoldOblique: Standard "(004.000)" Standard ROM
+*Font Courier-Oblique: Standard "(004.000)" Standard ROM
+*Font Courier: Standard "(004.000)" Standard ROM
+*Font Eurostile-Bold: Standard "(001.002)" Standard ROM
+*Font Eurostile-BoldExtendedTwo: Standard "(001.003)" Standard ROM
+*Font Eurostile-ExtendedTwo: Standard "(001.003)" Standard ROM
+*Font Eurostile: Standard "(001.003)" Standard ROM
+*Font Geneva: Standard "(001.000)" ExtendedRoman ROM
+*Font GillSans-Bold: Standard "(001.002)" Standard ROM
+*Font GillSans-BoldCondensed: Standard "(001.002)" Standard ROM
+*Font GillSans-BoldItalic: Standard "(001.003)" Standard ROM
+*Font GillSans-Condensed: Standard "(001.002)" Standard ROM
+*Font GillSans-ExtraBold: Standard "(001.002)" Standard ROM
+*Font GillSans-Italic: Standard "(001.003)" Standard ROM
+*Font GillSans-Light: Standard "(001.002)" Standard ROM
+*Font GillSans-LightItalic: Standard "(001.003)" Standard ROM
+*Font GillSans: Standard "(001.003)" Standard ROM
+*Font Goudy-Bold: Standard "(001.003)" Standard ROM
+*Font Goudy-BoldItalic: Standard "(001.003)" Standard ROM
+*Font Goudy-ExtraBold: Standard "(001.002)" Standard ROM
+*Font Goudy-Italic: Standard "(001.003)" Standard ROM
+*Font Goudy: Standard "(001.004)" Standard ROM
+*Font Helvetica-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-BoldOblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-BoldObl: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Condensed: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-Bold: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-BoldOblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica-Narrow: Standard "(003.000)" Standard ROM
+*Font Helvetica-Oblique: Standard "(003.000)" Standard ROM
+*Font Helvetica: Standard "(003.000)" Standard ROM
+*Font HoeflerText-Black: Standard "(001.000)" ExtendedRoman ROM
+*Font HoeflerText-BlackItalic: Standard "(001.000)" ExtendedRoman ROM
+*Font HoeflerText-Italic: Standard "(001.000)" ExtendedRoman ROM
+*Font HoeflerText-Ornaments: Special "(001.001)" Special ROM
+*Font HoeflerText-Regular: Standard "(001.000)" ExtendedRoman ROM
+*Font JoannaMT-Bold: Standard "(001.001)" Standard ROM
+*Font JoannaMT-BoldItalic: Standard "(001.001)" Standard ROM
+*Font JoannaMT-Italic: Standard "(001.001)" Standard ROM
+*Font JoannaMT: Standard "(001.001)" Standard ROM
+*Font LetterGothic-Bold: Standard "(001.007)" Standard ROM
+*Font LetterGothic-BoldSlanted: Standard "(001.006)" Standard ROM
+*Font LetterGothic-Slanted: Standard "(001.005)" Standard ROM
+*Font LetterGothic: Standard "(001.005)" Standard ROM
+*Font LubalinGraph-Book: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-BookOblique: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-Demi: Standard "(001.004)" Standard ROM
+*Font LubalinGraph-DemiOblique: Standard "(001.004)" Standard ROM
+*Font Marigold: Standard "(001.001)" Standard ROM
+*Font MonaLisa-Recut: Standard "(001.001)" Standard ROM
+*Font Monaco: Standard "(001.001)" ExtendedRoman ROM
+*Font NewCenturySchlbk-Bold: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-BoldItalic: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-Italic: Standard "(003.000)" Standard ROM
+*Font NewCenturySchlbk-Roman: Standard "(003.000)" Standard ROM
+*Font NewYork: Standard "(001.000)" ExtendedRoman ROM
+*Font OCRBLetM: Standard "(1.05)" Standard ROM
+*Font Optima-Bold: Standard "(001.007)" Standard ROM
+*Font Optima-BoldItalic: Standard "(001.001)" Standard ROM
+*Font Optima-Italic: Standard "(001.001)" Standard ROM
+*Font Optima: Standard "(001.006)" Standard ROM
+*Font Oxford: Standard "(001.001)" Standard ROM
+*Font Palatino-Bold: Standard "(003.000)" Standard ROM
+*Font Palatino-BoldItalic: Standard "(003.000)" Standard ROM
+*Font Palatino-Italic: Standard "(003.000)" Standard ROM
+*Font Palatino-Roman: Standard "(003.000)" Standard ROM
+*Font StempelGaramond-Bold: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-BoldItalic: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-Italic: Standard "(001.003)" Standard ROM
+*Font StempelGaramond-Roman: Standard "(001.003)" Standard ROM
+*Font Symbol: Special "(001.008)" Special ROM
+*Font Tekton: Standard "(001.002)" Standard ROM
+*Font Times-Bold: Standard "(003.000)" Standard ROM
+*Font Times-BoldItalic: Standard "(003.000)" Standard ROM
+*Font Times-Italic: Standard "(003.000)" Standard ROM
+*Font Times-Roman: Standard "(003.000)" Standard ROM
+*Font TimesNewRomanPS-BoldItalicMT: Standard "(001.003)" Standard ROM
+*Font TimesNewRomanPS-BoldMT: Standard "(001.004)" Standard ROM
+*Font TimesNewRomanPS-ItalicMT: Standard "(001.003)" Standard ROM
+*Font TimesNewRomanPSMT: Standard "(001.003)" Standard ROM
+*Font Univers-Bold: Standard "(001.004)" Standard ROM
+*Font Univers-BoldExt: Standard "(001.001)" Standard ROM
+*Font Univers-BoldExtObl: Standard "(001.001)" Standard ROM
+*Font Univers-BoldOblique: Standard "(001.004)" Standard ROM
+*Font Univers-Condensed: Standard "(001.003)" Standard ROM
+*Font Univers-CondensedBold: Standard "(001.002)" Standard ROM
+*Font Univers-CondensedBoldOblique: Standard "(001.002)" Standard ROM
+*Font Univers-CondensedOblique: Standard "(001.003)" Standard ROM
+*Font Univers-Extended: Standard "(001.001)" Standard ROM
+*Font Univers-ExtendedObl: Standard "(001.001)" Standard ROM
+*Font Univers-Light: Standard "(001.004)" Standard ROM
+*Font Univers-LightOblique: Standard "(001.004)" Standard ROM
+*Font Univers-Oblique: Standard "(001.004)" Standard ROM
+*Font Univers: Standard "(001.004)" Standard ROM
+*Font Wingdings-Regular: Special "(001.001)" Special ROM
+*Font ZapfChancery-MediumItalic: Standard "(003.000)" Standard ROM
+*Font ZapfDingbats: Special "(002.000)" Special ROM
+
+
+*UIConstraints: *Option6 None *InputSlot 3rdTray
+*UIConstraints: *Option6 None *InputSlot 4thTray
+*UIConstraints: *Option6 3Tray *InputSlot 4thTray
+*UIConstraints: *InputSlot 3rdTray *Option6 None
+*UIConstraints: *InputSlot 4thTray *Option6 None
+*UIConstraints: *InputSlot 4thTray *Option6 3Tray
+*UIConstraints: *Option6 None *OKSlipSheet 3rdTray
+*UIConstraints: *Option6 None *OKSlipSheet 4thTray
+*UIConstraints: *Option6 3Tray *OKSlipSheet 4thTray
+*UIConstraints: *OKSlipSheet 3rdTray *Option6 None
+*UIConstraints: *OKSlipSheet 4thTray *Option6 None
+*UIConstraints: *OKSlipSheet 4thTray *Option6 3Tray
+*UIConstraints: *Option2 False *Duplex DuplexNoTumble
+*UIConstraints: *Option2 False *Duplex DuplexTumble
+*UIConstraints: *Duplex DuplexNoTumble *Option2 False
+*UIConstraints: *Duplex DuplexTumble *Option2 False
+
+*UIConstraints: *PageSize EnvMonarch *InputSlot MediaTypeAPS
+*UIConstraints: *PageSize Env10 *InputSlot MediaTypeAPS
+*UIConstraints: *PageSize EnvDL *InputSlot MediaTypeAPS
+*UIConstraints: *PageSize EnvC5 *InputSlot MediaTypeAPS
+*UIConstraints: *PageSize A6 *InputSlot MediaTypeAPS
+*UIConstraints: *InputSlot MediaTypeAPS *PageSize EnvMonarch
+*UIConstraints: *InputSlot MediaTypeAPS *PageSize Env10
+*UIConstraints: *InputSlot MediaTypeAPS *PageSize EnvDL
+*UIConstraints: *InputSlot MediaTypeAPS *PageSize EnvC5
+*UIConstraints: *InputSlot MediaTypeAPS *PageSize A6
+*UIConstraints: *PageRegion EnvMonarch *InputSlot MediaTypeAPS
+*UIConstraints: *PageRegion Env10 *InputSlot MediaTypeAPS
+*UIConstraints: *PageRegion EnvDL *InputSlot MediaTypeAPS
+*UIConstraints: *PageRegion EnvC5 *InputSlot MediaTypeAPS
+*UIConstraints: *PageRegion A6 *InputSlot MediaTypeAPS
+*UIConstraints: *InputSlot MediaTypeAPS *PageRegion EnvMonarch
+*UIConstraints: *InputSlot MediaTypeAPS *PageRegion Env10
+*UIConstraints: *InputSlot MediaTypeAPS *PageRegion EnvDL
+*UIConstraints: *InputSlot MediaTypeAPS *PageRegion EnvC5
+*UIConstraints: *InputSlot MediaTypeAPS *PageRegion A6
+
+*UIConstraints: *OKSlipSheet AutoTray *PageSize EnvMonarch
+*UIConstraints: *OKSlipSheet 1stTray *PageSize EnvMonarch
+*UIConstraints: *OKSlipSheet 2ndTray *PageSize EnvMonarch
+*UIConstraints: *OKSlipSheet 3rdTray *PageSize EnvMonarch
+*UIConstraints: *OKSlipSheet 4thTray *PageSize EnvMonarch
+*UIConstraints: *OKSlipSheet AutoTray *PageRegion EnvMonarch
+*UIConstraints: *OKSlipSheet 1stTray *PageRegion EnvMonarch
+*UIConstraints: *OKSlipSheet 2ndTray *PageRegion EnvMonarch
+*UIConstraints: *OKSlipSheet 3rdTray *PageRegion EnvMonarch
+*UIConstraints: *OKSlipSheet 4thTray *PageRegion EnvMonarch
+*UIConstraints: *PageSize EnvMonarch *OKSlipSheet AutoTray
+*UIConstraints: *PageSize EnvMonarch *OKSlipSheet 1stTray
+*UIConstraints: *PageSize EnvMonarch *OKSlipSheet 2ndTray
+*UIConstraints: *PageSize EnvMonarch *OKSlipSheet 3rdTray
+*UIConstraints: *PageSize EnvMonarch *OKSlipSheet 4thTray
+*UIConstraints: *PageRegion EnvMonarch *OKSlipSheet AutoTray
+*UIConstraints: *PageRegion EnvMonarch *OKSlipSheet 1stTray
+*UIConstraints: *PageRegion EnvMonarch *OKSlipSheet 2ndTray
+*UIConstraints: *PageRegion EnvMonarch *OKSlipSheet 3rdTray
+*UIConstraints: *PageRegion EnvMonarch *OKSlipSheet 4thTray
+*UIConstraints: *OKSlipSheet AutoTray *PageSize Env10
+*UIConstraints: *OKSlipSheet 1stTray *PageSize Env10
+*UIConstraints: *OKSlipSheet 2ndTray *PageSize Env10
+*UIConstraints: *OKSlipSheet 3rdTray *PageSize Env10
+*UIConstraints: *OKSlipSheet 4thTray *PageSize Env10
+*UIConstraints: *OKSlipSheet AutoTray *PageRegion Env10
+*UIConstraints: *OKSlipSheet 1stTray *PageRegion Env10
+*UIConstraints: *OKSlipSheet 2ndTray *PageRegion Env10
+*UIConstraints: *OKSlipSheet 3rdTray *PageRegion Env10
+*UIConstraints: *OKSlipSheet 4thTray *PageRegion Env10
+*UIConstraints: *PageSize Env10 *OKSlipSheet AutoTray
+*UIConstraints: *PageSize Env10 *OKSlipSheet 1stTray
+*UIConstraints: *PageSize Env10 *OKSlipSheet 2ndTray
+*UIConstraints: *PageSize Env10 *OKSlipSheet 3rdTray
+*UIConstraints: *PageSize Env10 *OKSlipSheet 4thTray
+*UIConstraints: *PageRegion Env10 *OKSlipSheet AutoTray
+*UIConstraints: *PageRegion Env10 *OKSlipSheet 1stTray
+*UIConstraints: *PageRegion Env10 *OKSlipSheet 2ndTray
+*UIConstraints: *PageRegion Env10 *OKSlipSheet 3rdTray
+*UIConstraints: *PageRegion Env10 *OKSlipSheet 4thTray
+*UIConstraints: *OKSlipSheet AutoTray *PageSize EnvDL
+*UIConstraints: *OKSlipSheet 1stTray *PageSize EnvDL
+*UIConstraints: *OKSlipSheet 2ndTray *PageSize EnvDL
+*UIConstraints: *OKSlipSheet 3rdTray *PageSize EnvDL
+*UIConstraints: *OKSlipSheet 4thTray *PageSize EnvDL
+*UIConstraints: *OKSlipSheet AutoTray *PageRegion EnvDL
+*UIConstraints: *OKSlipSheet 1stTray *PageRegion EnvDL
+*UIConstraints: *OKSlipSheet 2ndTray *PageRegion EnvDL
+*UIConstraints: *OKSlipSheet 3rdTray *PageRegion EnvDL
+*UIConstraints: *OKSlipSheet 4thTray *PageRegion EnvDL
+*UIConstraints: *PageSize EnvDL *OKSlipSheet AutoTray
+*UIConstraints: *PageSize EnvDL *OKSlipSheet 1stTray
+*UIConstraints: *PageSize EnvDL *OKSlipSheet 2ndTray
+*UIConstraints: *PageSize EnvDL *OKSlipSheet 3rdTray
+*UIConstraints: *PageSize EnvDL *OKSlipSheet 4thTray
+*UIConstraints: *PageRegion EnvDL *OKSlipSheet AutoTray
+*UIConstraints: *PageRegion EnvDL *OKSlipSheet 1stTray
+*UIConstraints: *PageRegion EnvDL *OKSlipSheet 2ndTray
+*UIConstraints: *PageRegion EnvDL *OKSlipSheet 3rdTray
+*UIConstraints: *PageRegion EnvDL *OKSlipSheet 4thTray
+*UIConstraints: *OKSlipSheet AutoTray *PageSize EnvC5
+*UIConstraints: *OKSlipSheet 1stTray *PageSize EnvC5
+*UIConstraints: *OKSlipSheet 2ndTray *PageSize EnvC5
+*UIConstraints: *OKSlipSheet 3rdTray *PageSize EnvC5
+*UIConstraints: *OKSlipSheet 4thTray *PageSize EnvC5
+*UIConstraints: *OKSlipSheet AutoTray *PageRegion EnvC5
+*UIConstraints: *OKSlipSheet 1stTray *PageRegion EnvC5
+*UIConstraints: *OKSlipSheet 2ndTray *PageRegion EnvC5
+*UIConstraints: *OKSlipSheet 3rdTray *PageRegion EnvC5
+*UIConstraints: *OKSlipSheet 4thTray *PageRegion EnvC5
+*UIConstraints: *PageSize EnvC5 *OKSlipSheet AutoTray
+*UIConstraints: *PageSize EnvC5 *OKSlipSheet 1stTray
+*UIConstraints: *PageSize EnvC5 *OKSlipSheet 2ndTray
+*UIConstraints: *PageSize EnvC5 *OKSlipSheet 3rdTray
+*UIConstraints: *PageSize EnvC5 *OKSlipSheet 4thTray
+*UIConstraints: *PageRegion EnvC5 *OKSlipSheet AutoTray
+*UIConstraints: *PageRegion EnvC5 *OKSlipSheet 1stTray
+*UIConstraints: *PageRegion EnvC5 *OKSlipSheet 2ndTray
+*UIConstraints: *PageRegion EnvC5 *OKSlipSheet 3rdTray
+*UIConstraints: *PageRegion EnvC5 *OKSlipSheet 4thTray
+*UIConstraints: *OKSlipSheet AutoTray *PageSize A6
+*UIConstraints: *OKSlipSheet AutoTray *PageRegion A6
+*UIConstraints: *PageSize A6 *OKSlipSheet AutoTray
+*UIConstraints: *PageRegion A6 *OKSlipSheet AutoTray
+
+*UIConstraints: *Duplex DuplexNoTumble *PageSize EnvMonarch
+*UIConstraints: *Duplex DuplexNoTumble *PageSize Env10
+*UIConstraints: *Duplex DuplexNoTumble *PageSize EnvDL
+*UIConstraints: *Duplex DuplexNoTumble *PageSize EnvC5
+*UIConstraints: *Duplex DuplexTumble *PageSize EnvMonarch
+*UIConstraints: *Duplex DuplexTumble *PageSize Env10
+*UIConstraints: *Duplex DuplexTumble *PageSize EnvDL
+*UIConstraints: *Duplex DuplexTumble *PageSize EnvC5
+*UIConstraints: *PageSize EnvMonarch *Duplex DuplexNoTumble
+*UIConstraints: *PageSize Env10 *Duplex DuplexNoTumble
+*UIConstraints: *PageSize EnvDL *Duplex DuplexNoTumble
+*UIConstraints: *PageSize EnvC5 *Duplex DuplexNoTumble
+*UIConstraints: *PageSize EnvMonarch *Duplex DuplexTumble
+*UIConstraints: *PageSize Env10 *Duplex DuplexTumble
+*UIConstraints: *PageSize EnvDL *Duplex DuplexTumble
+*UIConstraints: *PageSize EnvC5 *Duplex DuplexTumble
+*UIConstraints: *Duplex DuplexNoTumble *PageRegion EnvMonarch
+*UIConstraints: *Duplex DuplexNoTumble *PageRegion Env10
+*UIConstraints: *Duplex DuplexNoTumble *PageRegion EnvDL
+*UIConstraints: *Duplex DuplexNoTumble *PageRegion EnvC5
+*UIConstraints: *Duplex DuplexTumble *PageRegion EnvMonarch
+*UIConstraints: *Duplex DuplexTumble *PageRegion Env10
+*UIConstraints: *Duplex DuplexTumble *PageRegion EnvDL
+*UIConstraints: *Duplex DuplexTumble *PageRegion EnvC5
+*UIConstraints: *PageRegion EnvMonarch *Duplex DuplexNoTumble
+*UIConstraints: *PageRegion Env10 *Duplex DuplexNoTumble
+*UIConstraints: *PageRegion EnvDL *Duplex DuplexNoTumble
+*UIConstraints: *PageRegion EnvC5 *Duplex DuplexNoTumble
+*UIConstraints: *PageRegion EnvMonarch *Duplex DuplexTumble
+*UIConstraints: *PageRegion Env10 *Duplex DuplexTumble
+*UIConstraints: *PageRegion EnvDL *Duplex DuplexTumble
+*UIConstraints: *PageRegion EnvC5 *Duplex DuplexTumble
+
+*UIConstraints: *OKSlipSheet AutoTray *Duplex DuplexNoTumble
+*UIConstraints: *OKSlipSheet 1stTray *Duplex DuplexNoTumble
+*UIConstraints: *OKSlipSheet 2ndTray *Duplex DuplexNoTumble
+*UIConstraints: *OKSlipSheet 3rdTray *Duplex DuplexNoTumble
+*UIConstraints: *OKSlipSheet 4thTray *Duplex DuplexNoTumble
+*UIConstraints: *OKSlipSheet AutoTray *Duplex DuplexTumble
+*UIConstraints: *OKSlipSheet 1stTray *Duplex DuplexTumble
+*UIConstraints: *OKSlipSheet 2ndTray *Duplex DuplexTumble
+*UIConstraints: *OKSlipSheet 3rdTray *Duplex DuplexTumble
+*UIConstraints: *OKSlipSheet 4thTray *Duplex DuplexTumble
+*UIConstraints: *Duplex DuplexNoTumble *OKSlipSheet AutoTray
+*UIConstraints: *Duplex DuplexNoTumble *OKSlipSheet 1stTray
+*UIConstraints: *Duplex DuplexNoTumble *OKSlipSheet 2ndTray
+*UIConstraints: *Duplex DuplexNoTumble *OKSlipSheet 3rdTray
+*UIConstraints: *Duplex DuplexNoTumble *OKSlipSheet 4thTray
+*UIConstraints: *Duplex DuplexTumble *OKSlipSheet AutoTray
+*UIConstraints: *Duplex DuplexTumble *OKSlipSheet 1stTray
+*UIConstraints: *Duplex DuplexTumble *OKSlipSheet 2ndTray
+*UIConstraints: *Duplex DuplexTumble *OKSlipSheet 3rdTray
+*UIConstraints: *Duplex DuplexTumble *OKSlipSheet 4thTray
+
+*UIConstraints: *OKSlipSheet 1stTray *InputSlot 1stTray
+*UIConstraints: *OKSlipSheet 2ndTray *InputSlot 2ndTray
+*UIConstraints: *OKSlipSheet 3rdTray *InputSlot 3rdTray
+*UIConstraints: *OKSlipSheet 4thTray *InputSlot 4thTray
+*UIConstraints: *InputSlot 1stTray *OKSlipSheet 1stTray
+*UIConstraints: *InputSlot 2ndTray *OKSlipSheet 2ndTray
+*UIConstraints: *InputSlot 3rdTray *OKSlipSheet 3rdTray
+*UIConstraints: *InputSlot 4thTray *OKSlipSheet 4thTray
+*UIConstraints: *Smoothing True *OKOutputMode 1200x1200
+*UIConstraints: *OKOutputMode 1200x1200 *Smoothing True
+
+*UIConstraints: *OKSlipSheet AutoTray *MediaType Stationary
+*UIConstraints: *OKSlipSheet 1stTray *MediaType Stationary
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType Stationary
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType Stationary
+*UIConstraints: *OKSlipSheet 4thTray *MediaType Stationary
+*UIConstraints: *OKSlipSheet AutoTray *MediaType RecyclePaper
+*UIConstraints: *OKSlipSheet 1stTray *MediaType RecyclePaper
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType RecyclePaper
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType RecyclePaper
+*UIConstraints: *OKSlipSheet 4thTray *MediaType RecyclePaper
+*UIConstraints: *OKSlipSheet AutoTray *MediaType ThickPaper
+*UIConstraints: *OKSlipSheet 1stTray *MediaType ThickPaper
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType ThickPaper
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType ThickPaper
+*UIConstraints: *OKSlipSheet 4thTray *MediaType ThickPaper
+*UIConstraints: *OKSlipSheet AutoTray *MediaType ThickPaper2
+*UIConstraints: *OKSlipSheet 1stTray *MediaType ThickPaper2
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType ThickPaper2
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType ThickPaper2
+*UIConstraints: *OKSlipSheet 4thTray *MediaType ThickPaper2
+*UIConstraints: *OKSlipSheet AutoTray *MediaType CustomSizedPaper1
+*UIConstraints: *OKSlipSheet 1stTray *MediaType CustomSizedPaper1
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType CustomSizedPaper1
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType CustomSizedPaper1
+*UIConstraints: *OKSlipSheet 4thTray *MediaType CustomSizedPaper1
+*UIConstraints: *OKSlipSheet AutoTray *MediaType CustomSizedPaper2
+*UIConstraints: *OKSlipSheet 1stTray *MediaType CustomSizedPaper2
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType CustomSizedPaper2
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType CustomSizedPaper2
+*UIConstraints: *OKSlipSheet 4thTray *MediaType CustomSizedPaper2
+*UIConstraints: *OKSlipSheet AutoTray *MediaType CustomSizedPaper3
+*UIConstraints: *OKSlipSheet 1stTray *MediaType CustomSizedPaper3
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType CustomSizedPaper3
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType CustomSizedPaper3
+*UIConstraints: *OKSlipSheet 4thTray *MediaType CustomSizedPaper3
+*UIConstraints: *OKSlipSheet AutoTray *MediaType CustomSizedPaper4
+*UIConstraints: *OKSlipSheet 1stTray *MediaType CustomSizedPaper4
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType CustomSizedPaper4
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType CustomSizedPaper4
+*UIConstraints: *OKSlipSheet 4thTray *MediaType CustomSizedPaper4
+*UIConstraints: *OKSlipSheet AutoTray *MediaType CustomSizedPaper5
+*UIConstraints: *OKSlipSheet 1stTray *MediaType CustomSizedPaper5
+*UIConstraints: *OKSlipSheet 2ndTray *MediaType CustomSizedPaper5
+*UIConstraints: *OKSlipSheet 3rdTray *MediaType CustomSizedPaper5
+*UIConstraints: *OKSlipSheet 4thTray *MediaType CustomSizedPaper5
+*UIConstraints: *MediaType Stationary *OKSlipSheet AutoTray
+*UIConstraints: *MediaType Stationary *OKSlipSheet 1stTray
+*UIConstraints: *MediaType Stationary *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType Stationary *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType Stationary *OKSlipSheet 4thTray
+*UIConstraints: *MediaType RecyclePaper *OKSlipSheet AutoTray
+*UIConstraints: *MediaType RecyclePaper *OKSlipSheet 1stTray
+*UIConstraints: *MediaType RecyclePaper *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType RecyclePaper *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType RecyclePaper *OKSlipSheet 4thTray
+*UIConstraints: *MediaType ThickPaper *OKSlipSheet AutoTray
+*UIConstraints: *MediaType ThickPaper *OKSlipSheet 1stTray
+*UIConstraints: *MediaType ThickPaper *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType ThickPaper *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType ThickPaper *OKSlipSheet 4thTray
+*UIConstraints: *MediaType ThickPaper2 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType ThickPaper2 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType ThickPaper2 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType ThickPaper2 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType ThickPaper2 *OKSlipSheet 4thTray
+*UIConstraints: *MediaType CustomSizedPaper1 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType CustomSizedPaper1 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType CustomSizedPaper1 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper1 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper1 *OKSlipSheet 4thTray
+*UIConstraints: *MediaType CustomSizedPaper2 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType CustomSizedPaper2 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType CustomSizedPaper2 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper2 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper2 *OKSlipSheet 4thTray
+*UIConstraints: *MediaType CustomSizedPaper3 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType CustomSizedPaper3 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType CustomSizedPaper3 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper3 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper3 *OKSlipSheet 4thTray
+*UIConstraints: *MediaType CustomSizedPaper4 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType CustomSizedPaper4 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType CustomSizedPaper4 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper4 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper4 *OKSlipSheet 4thTray
+*UIConstraints: *MediaType CustomSizedPaper5 *OKSlipSheet AutoTray
+*UIConstraints: *MediaType CustomSizedPaper5 *OKSlipSheet 1stTray
+*UIConstraints: *MediaType CustomSizedPaper5 *OKSlipSheet 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper5 *OKSlipSheet 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper5 *OKSlipSheet 4thTray
+
+*UIConstraints: *MediaType Transparency *Duplex DuplexTumble
+*UIConstraints: *MediaType Transparency *Duplex DuplexNoTumble
+*UIConstraints: *Duplex DuplexTumble *MediaType Transparency
+*UIConstraints: *Duplex DuplexNoTumble *MediaType Transparency
+
+*UIConstraints: *MediaType Stationary *InputSlot 1stTray
+*UIConstraints: *MediaType Stationary *InputSlot 2ndTray
+*UIConstraints: *MediaType Stationary *InputSlot 3rdTray
+*UIConstraints: *MediaType Stationary *InputSlot 4thTray
+*UIConstraints: *MediaType RecyclePaper *InputSlot 1stTray
+*UIConstraints: *MediaType RecyclePaper *InputSlot 2ndTray
+*UIConstraints: *MediaType RecyclePaper *InputSlot 3rdTray
+*UIConstraints: *MediaType RecyclePaper *InputSlot 4thTray
+*UIConstraints: *MediaType ThickPaper *InputSlot 1stTray
+*UIConstraints: *MediaType ThickPaper *InputSlot 2ndTray
+*UIConstraints: *MediaType ThickPaper *InputSlot 3rdTray
+*UIConstraints: *MediaType ThickPaper *InputSlot 4thTray
+*UIConstraints: *MediaType ThickPaper2 *InputSlot 1stTray
+*UIConstraints: *MediaType ThickPaper2 *InputSlot 2ndTray
+*UIConstraints: *MediaType ThickPaper2 *InputSlot 3rdTray
+*UIConstraints: *MediaType ThickPaper2 *InputSlot 4thTray
+*UIConstraints: *MediaType Transparency *InputSlot 1stTray
+*UIConstraints: *MediaType Transparency *InputSlot 2ndTray
+*UIConstraints: *MediaType Transparency *InputSlot 3rdTray
+*UIConstraints: *MediaType Transparency *InputSlot 4thTray
+*UIConstraints: *MediaType CustomSizedPaper1 *InputSlot 1stTray
+*UIConstraints: *MediaType CustomSizedPaper1 *InputSlot 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper1 *InputSlot 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper1 *InputSlot 4thTray
+*UIConstraints: *MediaType CustomSizedPaper2 *InputSlot 1stTray
+*UIConstraints: *MediaType CustomSizedPaper2 *InputSlot 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper2 *InputSlot 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper2 *InputSlot 4thTray
+*UIConstraints: *MediaType CustomSizedPaper3 *InputSlot 1stTray
+*UIConstraints: *MediaType CustomSizedPaper3 *InputSlot 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper3 *InputSlot 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper3 *InputSlot 4thTray
+*UIConstraints: *MediaType CustomSizedPaper4 *InputSlot 1stTray
+*UIConstraints: *MediaType CustomSizedPaper4 *InputSlot 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper4 *InputSlot 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper4 *InputSlot 4thTray
+*UIConstraints: *MediaType CustomSizedPaper5 *InputSlot 1stTray
+*UIConstraints: *MediaType CustomSizedPaper5 *InputSlot 2ndTray
+*UIConstraints: *MediaType CustomSizedPaper5 *InputSlot 3rdTray
+*UIConstraints: *MediaType CustomSizedPaper5 *InputSlot 4thTray
+*UIConstraints: *InputSlot 1stTray *MediaType Stationary
+*UIConstraints: *InputSlot 2ndTray *MediaType Stationary
+*UIConstraints: *InputSlot 3rdTray *MediaType Stationary
+*UIConstraints: *InputSlot 4thTray *MediaType Stationary
+*UIConstraints: *InputSlot 1stTray *MediaType RecyclePaper
+*UIConstraints: *InputSlot 2ndTray *MediaType RecyclePaper
+*UIConstraints: *InputSlot 3rdTray *MediaType RecyclePaper
+*UIConstraints: *InputSlot 4thTray *MediaType RecyclePaper
+*UIConstraints: *InputSlot 1stTray *MediaType ThickPaper
+*UIConstraints: *InputSlot 2ndTray *MediaType ThickPaper
+*UIConstraints: *InputSlot 3rdTray *MediaType ThickPaper
+*UIConstraints: *InputSlot 4thTray *MediaType ThickPaper
+*UIConstraints: *InputSlot 1stTray *MediaType ThickPaper2
+*UIConstraints: *InputSlot 2ndTray *MediaType ThickPaper2
+*UIConstraints: *InputSlot 3rdTray *MediaType ThickPaper2
+*UIConstraints: *InputSlot 4thTray *MediaType ThickPaper2
+*UIConstraints: *InputSlot 1stTray *MediaType Transparency
+*UIConstraints: *InputSlot 2ndTray *MediaType Transparency
+*UIConstraints: *InputSlot 3rdTray *MediaType Transparency
+*UIConstraints: *InputSlot 4thTray *MediaType Transparency
+*UIConstraints: *InputSlot 1stTray *MediaType CustomSizedPaper1
+*UIConstraints: *InputSlot 2ndTray *MediaType CustomSizedPaper1
+*UIConstraints: *InputSlot 3rdTray *MediaType CustomSizedPaper1
+*UIConstraints: *InputSlot 4thTray *MediaType CustomSizedPaper1
+*UIConstraints: *InputSlot 1stTray *MediaType CustomSizedPaper2
+*UIConstraints: *InputSlot 2ndTray *MediaType CustomSizedPaper2
+*UIConstraints: *InputSlot 3rdTray *MediaType CustomSizedPaper2
+*UIConstraints: *InputSlot 4thTray *MediaType CustomSizedPaper2
+*UIConstraints: *InputSlot 1stTray *MediaType CustomSizedPaper3
+*UIConstraints: *InputSlot 2ndTray *MediaType CustomSizedPaper3
+*UIConstraints: *InputSlot 3rdTray *MediaType CustomSizedPaper3
+*UIConstraints: *InputSlot 4thTray *MediaType CustomSizedPaper3
+*UIConstraints: *InputSlot 1stTray *MediaType CustomSizedPaper4
+*UIConstraints: *InputSlot 2ndTray *MediaType CustomSizedPaper4
+*UIConstraints: *InputSlot 3rdTray *MediaType CustomSizedPaper4
+*UIConstraints: *InputSlot 4thTray *MediaType CustomSizedPaper4
+*UIConstraints: *InputSlot 1stTray *MediaType CustomSizedPaper5
+*UIConstraints: *InputSlot 2ndTray *MediaType CustomSizedPaper5
+*UIConstraints: *InputSlot 3rdTray *MediaType CustomSizedPaper5
+*UIConstraints: *InputSlot 4thTray *MediaType CustomSizedPaper5
+
+*UIConstraints: *InputSlot 1stTray *OKSubPaperSelection Policy3
+*UIConstraints: *InputSlot 1stTray *OKSubPaperSelection Policy4
+*UIConstraints: *InputSlot 1stTray *OKSubPaperSelection Policy5
+*UIConstraints: *InputSlot 1stTray *OKSubPaperSelection Policy6
+*UIConstraints: *InputSlot 2ndTray *OKSubPaperSelection Policy3
+*UIConstraints: *InputSlot 2ndTray *OKSubPaperSelection Policy4
+*UIConstraints: *InputSlot 2ndTray *OKSubPaperSelection Policy5
+*UIConstraints: *InputSlot 2ndTray *OKSubPaperSelection Policy6
+*UIConstraints: *InputSlot 3rdTray *OKSubPaperSelection Policy3
+*UIConstraints: *InputSlot 3rdTray *OKSubPaperSelection Policy4
+*UIConstraints: *InputSlot 3rdTray *OKSubPaperSelection Policy5
+*UIConstraints: *InputSlot 3rdTray *OKSubPaperSelection Policy6
+*UIConstraints: *InputSlot 4thTray *OKSubPaperSelection Policy3
+*UIConstraints: *InputSlot 4thTray *OKSubPaperSelection Policy4
+*UIConstraints: *InputSlot 4thTray *OKSubPaperSelection Policy5
+*UIConstraints: *InputSlot 4thTray *OKSubPaperSelection Policy6
+*UIConstraints: *OKSubPaperSelection Policy3 *InputSlot 1stTray
+*UIConstraints: *OKSubPaperSelection Policy4 *InputSlot 1stTray
+*UIConstraints: *OKSubPaperSelection Policy5 *InputSlot 1stTray
+*UIConstraints: *OKSubPaperSelection Policy6 *InputSlot 1stTray
+*UIConstraints: *OKSubPaperSelection Policy3 *InputSlot 2ndTray
+*UIConstraints: *OKSubPaperSelection Policy4 *InputSlot 2ndTray
+*UIConstraints: *OKSubPaperSelection Policy5 *InputSlot 2ndTray
+*UIConstraints: *OKSubPaperSelection Policy6 *InputSlot 2ndTray
+*UIConstraints: *OKSubPaperSelection Policy3 *InputSlot 3rdTray
+*UIConstraints: *OKSubPaperSelection Policy4 *InputSlot 3rdTray
+*UIConstraints: *OKSubPaperSelection Policy5 *InputSlot 3rdTray
+*UIConstraints: *OKSubPaperSelection Policy6 *InputSlot 3rdTray
+*UIConstraints: *OKSubPaperSelection Policy3 *InputSlot 4thTray
+*UIConstraints: *OKSubPaperSelection Policy4 *InputSlot 4thTray
+*UIConstraints: *OKSubPaperSelection Policy5 *InputSlot 4thTray
+*UIConstraints: *OKSubPaperSelection Policy6 *InputSlot 4thTray
+
+*UIConstraints: *Option4 False *OutputBin OCT
+*UIConstraints: *OutputBin OCT *Option4 False
+*UIConstraints: *OutputBin RearTray *Duplex DuplexNoTumble
+*UIConstraints: *OutputBin RearTray *Duplex DuplexTumble
+*UIConstraints: *Duplex DuplexNoTumble *OutputBin RearTray
+*UIConstraints: *Duplex DuplexTumble *OutputBin RearTray
+*UIConstraints: *OutputBin RearTray *Jog DeviceDeactivation
+*UIConstraints: *OutputBin RearTray *Jog EndOfSet
+*UIConstraints: *Jog DeviceDeactivation *OutputBin RearTray
+*UIConstraints: *Jog EndOfSet *OutputBin RearTray
+*UIConstraints: *OutputBin CenterTray *Jog DeviceDeactivation
+*UIConstraints: *OutputBin CenterTray *Jog EndOfSet
+*UIConstraints: *Jog DeviceDeactivation *OutputBin CenterTray
+*UIConstraints: *Jog EndOfSet *OutputBin CenterTray
+*UIConstraints: *PageSize FanFoldGermanLegal *OutputBin RearTray
+*UIConstraints: *PageSize Legal *OutputBin RearTray
+*UIConstraints: *OutputBin RearTray *PageSize FanFoldGermanLegal
+*UIConstraints: *OutputBin RearTray *PageSize Legal
+*UIConstraints: *PageRegion FanFoldGermanLegal *OutputBin RearTray
+*UIConstraints: *PageRegion Legal *OutputBin RearTray
+*UIConstraints: *OutputBin RearTray *PageRegion FanFoldGermanLegal
+*UIConstraints: *OutputBin RearTray *PageRegion Legal
+
+*% Printer Messages (verbatim from printer):
+*Message: "%%[ exitserver: permanent state may be changed ]%%"
+*Message: "%%[ Flushing: rest of job (to end-of-file) will be ignored ]%%"
+*Message: "FontName not found, using Courier"
+
+*% Status (format: %%[ status: <one of these> ] %%)
+*Status: "initializing"
+*Status: "idle"
+*Status: "holding"
+*Status: "busy"
+*Status: "waiting"
+*Status: "PrinterError: Service Call"
+*Status: "PrinterError: Drum&Toner Cartridge is Missing"
+*Status: "PrinterError: No Toner"
+*Status: "PrinterError: Left Hand Cover Open"
+*Status: "PrinterError: Cabinet Left Hand Cover Open"
+*Status: "PrinterError: Duplex Docking Cover Open"
+*Status: "PrinterError: Side Tray Docking Unit Open"
+*Status: "PrinterError: Side Tray Hand Cover Open"
+*Status: "PrinterError: Tray Lifter Failed"
+*Status: "PrinterError: Paper Jam"
+*Status: "PrinterError: Paper Jam at Fuser"
+*Status: "PrinterError: Paper Jam at Registration Roller"
+*Status: "PrinterError: Paper Jam at Duplex Module"
+*Status: "PrinterError: Paper Jam at Duplex Tray"
+*Status: "PrinterError: Paper Jam at Tray1"
+*Status: "PrinterError: Paper Jam at Tray2"
+*Status: "PrinterError: Paper Jam at Tray3"
+*Status: "PrinterError: Paper Jam at Tray4"
+*Status: "PrinterError: Paper Jam at Manual Feed Tray"
+*Status: "PrinterError: Paper Jam at Side Tray"
+*Status: "PrinterError: Center bin is Full"
+*Status: "PrinterError: Duplex Module Fail"
+*Status: "PrinterError: Tray is Missing"
+*Status: "PrinterError: Any Trays are Missing"
+*Status: "PrinterError: Out of Paper in All Trays"
+*Status: "PrinterError: Out of Paper"
+*Status: "PrinterError: Out of Paper in Maunal Feed Tray"
+
+*% Input Sources (format: %%[ status: <stat>; source: <one of these> ]%% )
+*Source: "Serial"
+*Source: "Parallel"
+*Source: "LocalTalk"
+*Source: "EtherTalk"
+*Source: "RemotePrinter"
+*Source: "PrintServer"
+*Source: "LPR"
+*Source: "Internal"
+
+*% Printer Error (format: %%[ PrinterError: <one of these> ]%%)
+*PrinterError: "Service Call"
+*PrinterError: "Drum&Toner Cartridge is Missing"
+*PrinterError: "No Toner"
+*PrinterError: "Left Hand Cover Open"
+*PrinterError: "Cabinet Left Hand Cover Open"
+*PrinterError: "Duplex Docking Cover Open"
+*PrinterError: "Side Tray Docking Unit Open"
+*PrinterError: "Side Tray Hand Cover Open"
+*PrinterError: "Tray Lifter Failed"
+*PrinterError: "Paper Jam"
+*PrinterError: "Paper Jam at Fuser"
+*PrinterError: "Paper Jam at Registration Roller"
+*PrinterError: "Paper Jam at Duplex Module"
+*PrinterError: "Paper Jam at Duplex Tray"
+*PrinterError: "Paper Jam at Tray1"
+*PrinterError: "Paper Jam at Tray2"
+*PrinterError: "Paper Jam at Tray3"
+*PrinterError: "Paper Jam at Tray4"
+*PrinterError: "Paper Jam at Manual Feed Tray"
+*PrinterError: "Paper Jam at Side Tray"
+*PrinterError: "Center bin is Full"
+*PrinterError: "Duplex Module Fail"
+*PrinterError: "Tray is Missing"
+*PrinterError: "Any Trays are Missing"
+*PrinterError: "Out of Paper in All Trays"
+*PrinterError: "Out of Paper"
+*PrinterError: "Out of Paper in Maunal Feed Tray"
+
+*% Color Separation Information =====================
+*DefaultGuaranteedMaxSeparations: 1
+*GuaranteedMaxSeparations 4: ""
+*GuaranteedMaxSeparations 3: ""
+*GuaranteedMaxSeparations 2: ""
+*GuaranteedMaxSeparations 1: ""
+
+*% End of PPD
