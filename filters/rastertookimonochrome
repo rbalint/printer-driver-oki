@@ -110,7 +110,7 @@ do
 
 		;;
 		*)
-			${ECHO} "INFO: Unkown option = [${i}] " 1>&2
+			${ECHO} "INFO: Unknown option = [${i}] " 1>&2
 		;;
 	esac
 done
