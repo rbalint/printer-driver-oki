@@ -238,17 +238,17 @@
 *DefaultDuplex: None
 *Duplex None/None: "
  <<
- /Duplex false /Tumble false /Policies << /Duplex 2 >>
+ /Duplex false /Tumble false
  >> setpagedevice"
 *End
 *Duplex DuplexNoTumble/Long-Edge Binding: "
  <<
- /Duplex true /Tumble false /Policies << /Duplex 2 >>
+ /Duplex true /Tumble false
  >> setpagedevice"
 *End
 *Duplex DuplexTumble/Short-Edge Binding: "
  <<
- /Duplex true /Tumble true /Policies << /Duplex 2 >>
+ /Duplex true /Tumble true
  >> setpagedevice"
 *End
 *CloseUI: *Duplex
